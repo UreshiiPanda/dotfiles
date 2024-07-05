@@ -1,0 +1,42 @@
+# BEGIN_KITTY_THEME
+# Dimmed Monokai
+include current-theme.conf
+# END_KITTY_THEME
+
+enabled_layouts tall:bias=50;full_size=1;mirrored=false
+
+remember_window_size yes
+
+
+# allow scripts to control Kitty
+allow_remote_control=yes
+
+# allow for changing of bg opacity w/ hotkeys
+dynamic_background_opacity yes
+
+# increase bg opacity
+map alt+cmd+] set_background_opacity +0.1
+
+# decrease bg opacity
+map alt+cmd+[ set_background_opacity -0.1
+
+
+background_opacity         0.3
+
+# get rid of annoying warning when pasting code into Kitty
+paste_actions filter
+
+
+# Jump around neighboring window Vi key binding
+#map ctrl+shift+w>h neighboring_window left
+#map ctrl+shift+w>l neighboring_window right
+#map ctrl+shift+w>j neighboring_window down
+#map ctrl+shift+w>k neighboring_window up
+#
+#map ctrl+shift+w>shift+h move_window left
+#map ctrl+shift+w>shift+l move_window right
+#map ctrl+shift+w>shift+j move_window down
+#map ctrl+shift+w>shift+k move_window up
+#
+
+
