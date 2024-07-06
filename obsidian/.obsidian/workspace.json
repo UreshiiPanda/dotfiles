@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Code/Hotkeys/Obsidian.md",
+                "file": "Code/Stow.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Code/Hotkeys/Obsidian.md",
+                "file": "Code/Stow.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Code/Hotkeys/Obsidian.md",
+                "file": "Code/Stow.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Code/Hotkeys/Obsidian.md"
+                "file": "Code/Stow.md"
               }
             }
           },
@@ -147,14 +147,15 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
+    "Code/Projects/Edu-Kunan-Site-Design.md",
     "TODO.md",
+    "Code/Hotkeys/Obsidian.md",
     "Code/Stow.md",
     "Code/Interviews/Qs-to-Interviewers.md",
     "Code/Interviews/Untitled.md",
     "Code/Projects/Zeal.md",
     "OneBag.md",
     "Japanese/JLPT/JLPT-N5-N4.md",
-    "Code/Projects/Edu-Kunan-Site-Design.md",
     "Code/Hotkeys/Fugitive.md",
     "Anime-Manga/Manga.md",
     "Keebs/Keyflow.md",
@@ -175,7 +176,6 @@
     "Anime-Manga/Anime-Shows.md",
     "Code/Django/DHAT-Setup.md",
     "Code/Cloud/GCP.md",
-    "Code/Projects/Ivy.md",
     "Images-Drawings/Pasted image 20240606222534.png",
     "Images-Drawings/Pasted image 20240606222511.png",
     "Images-Drawings/JOIN Types.png",
