@@ -1,0 +1,16 @@
+{
+  "promptDelete": false,
+  "vimMode": true,
+  "autoPairBrackets": false,
+  "spellcheck": false,
+  "rightToLeft": false,
+  "showLineNumber": true,
+  "readableLineLength": true,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "showUnsupportedFiles": true,
+  "attachmentFolderPath": "Images-Drawings",
+  "autoPairMarkdown": false,
+  "tabSize": 6,
+  "showRibbon": false
+}

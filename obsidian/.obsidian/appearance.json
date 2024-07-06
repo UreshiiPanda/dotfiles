@@ -1,0 +1,16 @@
+{
+  "accentColor": "",
+  "textFontFamily": "Noto Serif Kannada",
+  "nativeMenus": false,
+  "translucency": false,
+  "interfaceFontFamily": "Noto Serif Kannada",
+  "cssTheme": "Shimmering Focus",
+  "monospaceFontFamily": "Noto Serif Kannada",
+  "baseFontSize": 14,
+  "enabledCssSnippets": [
+    "main_font",
+    "custom"
+  ],
+  "showViewHeader": false,
+  "theme": "obsidian"
+}

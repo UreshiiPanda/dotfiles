@@ -1,0 +1,19 @@
+{
+  "shimmering-focus@@font-heading-theme": "\"Noto Serif Kannada\"",
+  "shimmering-focus@@use-relative-line-numbers": false,
+  "shimmering-focus@@longform-font-text-theme": "\"Noto Serif Kannada\"",
+  "shimmering-focus@@folded-line-emphasis": true,
+  "shimmering-focus@@mac-os-native": false,
+  "shimmering-focus@@bg-hue-dark": 230,
+  "shimmering-focus@@bg-hue-light": 230,
+  "anuppuccin-theme-settings@@anp-print": true,
+  "minimal-style@@embed-strict": false,
+  "minimal-style@@pdf-dark-opacity": 0.25,
+  "minimal-style@@pdf-invert-dark": true,
+  "minimal-style@@pdf-blend-light": true,
+  "anuppuccin-theme-settings@@anuppuccin-theme-light": "ctp-latte",
+  "shimmering-focus@@hide-backlinks-status-bar": true,
+  "shimmering-focus@@hide-properties-in-statusbar": true,
+  "shimmering-focus@@wordcount-only-when-writing": true,
+  "shimmering-focus@@hide-longform-status-bar": true
+}
