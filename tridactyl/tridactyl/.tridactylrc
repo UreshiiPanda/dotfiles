@@ -55,6 +55,12 @@ set searchurls.lz http://localhost:4200/
 set searchurls.cz https://calendar.google.com/calendar/u/1/r
 set searchurls.fb https://my.freshbooks.com/#/time-tracking/review
 set searchurls.it https://www.italki.com/dashboard
+set searchurls.al https://alight.service-now.com/sp?id=ec_dashboard
+set searchurls.bee https://prod.beeline.com/alight/welcome/
+set searchurls.sa https://app.slack.com/client/T0CF520R1/C065FCG9133
+set searchurls.nz https://www.notion.so/zealitconsultants/d17af203dcfc4cc48600d9bc91f623e4
+set searchurls.ja https://healthnav.atlassian.net/wiki/spaces/CG/overview
+set searchurls.gia https://github.com/CompassPHS
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
@@ -236,6 +242,7 @@ bind ' gobble 1 markjump
 unbind <S-Space>
 unbind <ACSD-D>
 bind <ACM-D> mode ignore
+bind 'C tab https://claude.ai/
 bind --mode=browser <C-.> sidebartoggle
 bind --mode=browser <C-,> escapehatch
 bind --mode=browser <C-6> tab #

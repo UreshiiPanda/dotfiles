@@ -209,5 +209,14 @@
       ],
       "key": "D"
     }
-  ]
+  ],
+  "file-explorer:new-folder": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "2"
+    }
+  ],
+  "workspace:goto-tab-2": []
 }
