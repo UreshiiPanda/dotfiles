@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Code/Projects/Edu-Kunan-Site-Design.md",
+                "file": "OneBag.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Code/Projects/Edu-Kunan-Site-Design.md",
+                "file": "OneBag.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Code/Projects/Edu-Kunan-Site-Design.md",
+                "file": "OneBag.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Code/Projects/Edu-Kunan-Site-Design.md"
+                "file": "OneBag.md"
               }
             }
           },
@@ -147,15 +147,17 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
-    "Code/Projects/Zeal.md",
     "Code/Projects/Edu-Kunan-Site-Design.md",
     "OneBag.md",
-    "Japanese/JLPT/JLPT-N3.md",
+    "Code/Hotkeys/Spicetify.md",
     "Japanese/JLPT/JLPT-N5-N4.md",
+    "Japanese/JLPT/JLPT-N3.md",
+    "Code/Hotkeys/Neovim.md",
+    "TODO.md",
+    "Code/Projects/Zeal.md",
     "Headphones.md",
     "Untitled",
     "Code/Stow.md",
-    "TODO.md",
     "Code/Hotkeys/Obsidian.md",
     "Code/Interviews/Qs-to-Interviewers.md",
     "Code/Interviews/Untitled.md",
@@ -168,8 +170,6 @@
     "Images-Drawings/Nihongo_Choukai.pdf",
     "Japanese/Soumatome.md",
     "Japanese/Soumatome",
-    "Code/Hotkeys/Neovim.md",
-    "Code/Hotkeys/Spicetify.md",
     "Code/Hotkeys/fugitibe.md",
     "Code/Git.md",
     "Code/Hotkeys/Tridactyl.md",
