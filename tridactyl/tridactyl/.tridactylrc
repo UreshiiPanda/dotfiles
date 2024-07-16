@@ -59,8 +59,8 @@ set searchurls.al https://alight.service-now.com/sp?id=ec_dashboard
 set searchurls.bee https://prod.beeline.com/alight/welcome/
 set searchurls.sa https://app.slack.com/client/T0CF520R1/C065FCG9133
 set searchurls.nz https://www.notion.so/zealitconsultants/d17af203dcfc4cc48600d9bc91f623e4
-set searchurls.ja https://healthnav.atlassian.net/wiki/spaces/CG/overview
 set searchurls.gia https://github.com/CompassPHS
+set searchurls.ja https://healthnav.atlassian.net/jira/software/c/projects/NSE/boards/1287
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
@@ -345,6 +345,8 @@ alias rcpush composite rc ; exclaim cd ~/.config/tridactyl && git add -A && git 
 alias tgm tgroupmove
 alias tgc tgroupcreate
 alias tgs tgroupswitch
+alias mu mute all
+alias um unmute all
 
 " Autocmds
 autocmd DocStart www.hackerrank.com mode ignore

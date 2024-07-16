@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OneBag.md",
+                "file": "Code/Projects/Alight1.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OneBag.md",
+                "file": "Code/Projects/Alight1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OneBag.md",
+                "file": "Code/Projects/Alight1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OneBag.md"
+                "file": "Code/Projects/Alight1.md"
               }
             }
           },
@@ -147,14 +147,17 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
-    "Code/Projects/Edu-Kunan-Site-Design.md",
+    "Code/Windows.md",
+    "TODO.md",
+    "Code/Projects/Alight1.md",
+    "Code/Projects/Zeal.md",
     "OneBag.md",
+    "Code/Projects/Edu-Kunan-Site-Design.md",
+    "Code/Hotkeys/Tridactyl.md",
     "Code/Hotkeys/Spicetify.md",
     "Japanese/JLPT/JLPT-N5-N4.md",
     "Japanese/JLPT/JLPT-N3.md",
     "Code/Hotkeys/Neovim.md",
-    "TODO.md",
-    "Code/Projects/Zeal.md",
     "Headphones.md",
     "Untitled",
     "Code/Stow.md",
@@ -172,11 +175,8 @@
     "Japanese/Soumatome",
     "Code/Hotkeys/fugitibe.md",
     "Code/Git.md",
-    "Code/Hotkeys/Tridactyl.md",
     "Code/Hotkeys/FireFox.md",
     "Code/OMSCS/OS2.md",
-    "Anime-Manga/Anime-Shows.md",
-    "Code/Django/DHAT-Setup.md",
     "Images-Drawings/Pasted image 20240606222534.png",
     "Images-Drawings/Pasted image 20240606222511.png",
     "Images-Drawings/JOIN Types.png",
