@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Code/Projects/Alight1.md",
+                "file": "Code/Hotkeys/Tridactyl.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Code/Projects/Alight1.md",
+                "file": "Code/Hotkeys/Tridactyl.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Code/Projects/Alight1.md",
+                "file": "Code/Hotkeys/Tridactyl.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Code/Projects/Alight1.md"
+                "file": "Code/Hotkeys/Tridactyl.md"
               }
             }
           },
@@ -147,9 +147,9 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
+    "Code/Projects/Alight1.md",
     "Code/Windows.md",
     "TODO.md",
-    "Code/Projects/Alight1.md",
     "Code/Projects/Zeal.md",
     "OneBag.md",
     "Code/Projects/Edu-Kunan-Site-Design.md",

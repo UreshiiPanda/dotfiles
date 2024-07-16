@@ -61,6 +61,7 @@ set searchurls.sa https://app.slack.com/client/T0CF520R1/C065FCG9133
 set searchurls.nz https://www.notion.so/zealitconsultants/d17af203dcfc4cc48600d9bc91f623e4
 set searchurls.gia https://github.com/CompassPHS
 set searchurls.ja https://healthnav.atlassian.net/jira/software/c/projects/NSE/boards/1287
+set searchurls.pa https://cicd.compassphs.com/go/pipelines
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
