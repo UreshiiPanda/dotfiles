@@ -1,13 +1,8 @@
 
--- include your color-changing file
--- require("colors")
-
-
 -- for lazy.nvim, we just return a big table of all of our plugins
 return {
 
-
-  -- Telescope plugin
+  -- Telescope
   {
     'nvim-telescope/telescope.nvim', 
     tag = '0.1.8',
@@ -17,7 +12,7 @@ return {
 
         -- search thru all files
         -- tell Telescope to not ignore hiddens, but then tell it to still ignore the .git dir
-        vim.keymap.set('n', '<leader>f', function() builtin.find_files({no_ignore=true, hidden=true, file_ignore_patterns={".git/", "node_modules/"}}) end, {})
+        vim.keymap.set('n', '<leader>f', function() builtin.find_files({no_ignore=true, hidden=true, file_ignore_patterns={".git/", "node_modules/", ".DS_Store"}}) end, {})
 
         -- search thru only git files
         -- Fuzzy search through the output of git ls-files command, respects .gitignore
@@ -32,9 +27,39 @@ return {
         -- Search for a string in your current working directory and 
         -- get results live as you type, respects .gitignore. (Requires ripgrep)
         vim.keymap.set('n', '<leader>lg', builtin.live_grep, {})
+
+        -- search through vim help keywords
+        vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+
+        -- search through vim commands
+        vim.keymap.set('n', '<leader>vc', builtin.commands, {})
+
+        -- grep search for the smaller word under the cursor
+        vim.keymap.set('n', '<leader>cw', function()
+            builtin.grep_string({ search = vim.fn.expand("<cword>") })
+        end)
+
+        -- grep search for the entire word/phrase under the cursor
+        vim.keymap.set('n', '<leader>cW', function()
+            builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
+        end)
+
     end,
 
 
+  },
+
+
+  -- Codeium
+  {
+      'Exafunction/codeium.vim',
+      config = function ()
+        -- Change '<C-g>' here to any keycode you like.
+        vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+        vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+        vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+        vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+      end
   },
 
 
@@ -45,8 +70,7 @@ return {
         config = function()
               require'nvim-treesitter.configs'.setup {
               -- A list of parser names, or "all" (these 10 listed parsers should always be installed)
-              ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "javascript", "typescript", "cpp",
-                        "rust"},
+              ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "javascript"},
 
               -- Install parsers synchronously (only applied to `ensure_installed`)
               sync_install = false,
@@ -256,18 +280,44 @@ return {
 
   -- Trouble for diagnostics
   {
-       "folke/trouble.nvim",
-       dependencies = { 
-           { "nvim-tree/nvim-web-devicons" } 
-       },
-       config = function()
-           vim.keymap.set("n", "<leader>qf", "<cmd>TroubleToggle quickfix<cr>",
-              {silent = true, noremap = true}
-            )
-
-            vim.keymap.set("n", "<leader>tt", "<cmd>Trouble<CR>")
-        end,
-
+    "folke/trouble.nvim",
+    dependencies = {
+        {"nvim-tree/nvim-web-devicons"},
+    },
+    opts = {}, 
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>tt",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>qf",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+    },
   },
 
   -- Zen mode
@@ -305,6 +355,35 @@ return {
         end)
 
     end,
+  },
+
+  {
+      "David-Kunz/gen.nvim",
+      opts = {
+          model = "llama3.1", -- The default model to use.
+          quit_map = "q", -- set keymap for close the response window
+          retry_map = "<c-r>", -- set keymap to re-send the current prompt
+          accept_map = "<c-cr>", -- set keymap to replace the previous selection with the last result
+          host = "localhost", -- The host running the Ollama service.
+          port = "11434", -- The port on which the Ollama service is listening.
+          display_mode = "float", -- The display mode. Can be "float" or "split" or "horizontal-split".
+          show_prompt = false, -- Shows the prompt submitted to Ollama.
+          show_model = true, -- Displays which model you are using at the beginning of your chat session.
+          no_auto_close = false, -- Never closes the window automatically.
+          hidden = false, -- Hide the generation window (if true, will implicitly set `prompt.replace = true`), requires Neovim >= 0.10
+          init = function(options) pcall(io.popen, "ollama serve > /dev/null 2>&1 &") end,
+          -- Function to initialize Ollama
+          command = function(options)
+              local body = {model = options.model, stream = true}
+              return "curl --silent --no-buffer -X POST http://" .. options.host .. ":" .. options.port .. "/api/chat -d $body"
+          end,
+          -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
+          -- This can also be a command string.
+          -- The executed command must return a JSON object with { response, context }
+          -- (context property is optional).
+          -- list_models = '<omitted lua function>', -- Retrieves a list of model names
+          debug = false -- Prints errors and the command which is run.
+      }
   },
 
 }

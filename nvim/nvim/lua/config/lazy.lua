@@ -120,8 +120,8 @@ vim.keymap.set("n", "J", "mzJ`z")
 --  ctrl-d and ctrl-u are for half-page jumping down/up respectively,
 --  but these next cmds make it so that the cursor stays in the middle of the
 --  page when you do these jumps
-vim.keymap.set("n", "<leader>l", "<C-d>zz")
-vim.keymap.set("n", "<leader>h", "<C-u>zz")
+vim.keymap.set("n", "<leader>ll", "<C-d>zz")
+vim.keymap.set("n", "<leader>hh", "<C-u>zz")
 
 -- these will keep the cursor in the middle of the page when jumping btw
 -- search terms
@@ -153,9 +153,6 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- don't allow Q to be pressed with "no press"
 vim.keymap.set("n", "Q", "<nop>")
 
--- these were for opening up a new tmux session
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
--- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- these next 4 are for quick-fix navigation in Vim
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -170,24 +167,10 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- turn the curr file into an executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- I don't know what this cmd does
--- vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
-
--- this is a plugin which makes useless animations in Vim
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
-vim.keymap.set("n", "<leader>gl", "<cmd>CellularAutomaton game_of_life<CR>");
-
 -- this is for :so %  which is "source curr NeoVim config file"
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("luafile $MYVIMRC")
 end)
-
--- these next 2 are for trouble plugin
-vim.keymap.set("n", "<leader>qf", "<cmd>TroubleToggle quickfix<cr>",
-  {silent = true, noremap = true}
-)
-
-vim.keymap.set("n", "<leader>tt", "<cmd>Trouble<CR>")
 
 
 
