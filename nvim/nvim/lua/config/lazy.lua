@@ -1,5 +1,84 @@
--- set leader key
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+
+
+
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- keep cursor big in insert mode
+vim.opt.guicursor = ""
+
+-- lines numbers and relative line numbers
+vim.opt.nu = true
+vim.opt.relativenumber = true
+
+--  4-space indenting
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
+-- turn off line wrapping
+vim.opt.wrap = false
+
+-- stop vim from auto-backups 
+vim.opt.swapfile = false
+vim.opt.backup = false
+
+-- store undos in here for long-term undo storage
+-- then you can find undos from days ago
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+-- turn off highlights on search
+vim.opt.hlsearch = false
+
+-- this is "incremental search" and it helps find tricky searches and
+-- also wild-card searches with * just like Bash does
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+-- this sets the numbers below the curr line to start again from 1
+-- and it makes sure that there are at least 8 more nums listed
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
+
+-- fast update times
+vim.opt.updatetime = 50
+
+-- set color strip in col 80
+-- vim.opt.colorcolumn = "80"
+
+-- get rid of nvim auto-comments
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])
+
+
+
+
+-- global remaps
 
 --remap horizontal buffer split
 vim.keymap.set("n", "<leader>bh", "<cmd>split<CR>")
@@ -67,6 +146,7 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
+
 -- I actually can't tell what this does
 -- vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
@@ -87,7 +167,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- was currently on when you pressed this cmd
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- turn the curr file into an executable 
+-- turn the curr file into an executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- I don't know what this cmd does
@@ -113,3 +193,15 @@ vim.keymap.set("n", "<leader>tt", "<cmd>Trouble<CR>")
 
 
 
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {
+    -- import your plugins
+    { import = "plugins" },
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "habamax" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})

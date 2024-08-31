@@ -12,11 +12,11 @@
   z-index: -1;
   content: "";
   position: absolute;
-  background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3d079e1f-386b-4bd0-84fc-cce9913fbc0c/ddaeqh8-86e9888e-77dc-46b3-845f-d2fa8d964f33.png/v1/fill/w_1024,h_587,q_80,strp/yharnam_2___bloodborne___by_anatofinnstark_ddaeqh8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTg3IiwicGF0aCI6IlwvZlwvM2QwNzllMWYtMzg2Yi00YmQwLTg0ZmMtY2NlOTkxM2ZiYzBjXC9kZGFlcWg4LTg2ZTk4ODhlLTc3ZGMtNDZiMy04NDVmLWQyZmE4ZDk2NGYzMy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7c5n7PdbTdPFSWHQcir-PrwYiK76WUWePyQ7qAijPm4');
+  background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6fb254a1-b5b9-4a24-a4bc-89d3bf39c7e0/dejy1n4-f2fd826a-c864-490a-a986-b95e63a72a95.png/v1/fill/w_1061,h_753,q_70,strp/w_a_r_m_s_p_o_t_by_dana_ulama_dejy1n4-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTEzNSIsInBhdGgiOiJcL2ZcLzZmYjI1NGExLWI1YjktNGEyNC1hNGJjLTg5ZDNiZjM5YzdlMFwvZGVqeTFuNC1mMmZkODI2YS1jODY0LTQ5MGEtYTk4Ni1iOTVlNjNhNzJhOTUucG5nIiwid2lkdGgiOiI8PTE2MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.zxfKXJl91nz0_HzDBuBcPTh8dusHCeGB_kpqDKmba-Y');
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1.0;
-  filter: brightness(70%) saturate(100%);
+  filter: brightness(45%) saturate(100%);
   left: 0;
   top: 0;
   right: 0;

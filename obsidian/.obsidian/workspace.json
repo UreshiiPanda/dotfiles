@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Code/Hotkeys/Tridactyl.md",
+                "file": "Code/Golang/GHAT.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Code/Hotkeys/Tridactyl.md",
+                "file": "Code/Golang/GHAT.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Code/Hotkeys/Tridactyl.md",
+                "file": "Code/Golang/GHAT.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Code/Hotkeys/Tridactyl.md"
+                "file": "Code/Golang/GHAT.md"
               }
             }
           },
@@ -147,36 +147,44 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
-    "Code/Projects/Alight1.md",
-    "Code/Windows.md",
-    "TODO.md",
-    "Code/Projects/Zeal.md",
-    "OneBag.md",
+    "Code/AI/RAG Pipelines.md",
+    "Code/Golang/GHAT.md",
+    "Code/AI",
+    "Code/Portfolio.md",
+    "Code/Tailwind",
+    "Code/Golang",
     "Code/Projects/Edu-Kunan-Site-Design.md",
-    "Code/Hotkeys/Tridactyl.md",
-    "Code/Hotkeys/Spicetify.md",
-    "Japanese/JLPT/JLPT-N5-N4.md",
+    "Code/Django/DHAT-Setup.md",
+    "Code/Tailwind/Tailwind Components.md",
+    "Keebs/Swoop.md",
+    "Code/Projects/swoop[.md",
     "Japanese/JLPT/JLPT-N3.md",
-    "Code/Hotkeys/Neovim.md",
-    "Headphones.md",
-    "Untitled",
-    "Code/Stow.md",
-    "Code/Hotkeys/Obsidian.md",
-    "Code/Interviews/Qs-to-Interviewers.md",
-    "Code/Interviews/Untitled.md",
-    "Code/Hotkeys/Fugitive.md",
+    "Japanese/Keigo.md",
+    "Japanese/Ageru-Kureru-Morau.md",
+    "Anime-Manga/Anime-Movies.md",
     "Anime-Manga/Manga.md",
-    "Keebs/Keyflow.md",
-    "Keebs/Keebs Overview.md",
-    "Keebs",
-    "Japanese/Soumatome/Choukai.md",
+    "Anime-Manga/Anime-Shows.md",
+    "Anime-Manga/anime.md",
     "Images-Drawings/Nihongo_Choukai.pdf",
-    "Japanese/Soumatome.md",
-    "Japanese/Soumatome",
-    "Code/Hotkeys/fugitibe.md",
-    "Code/Git.md",
-    "Code/Hotkeys/FireFox.md",
-    "Code/OMSCS/OS2.md",
+    "Keebs/Keebs Overview.md",
+    "Keebs/Swoop",
+    "Code/Interviews/Views-Short.md",
+    "Keebs/Untitled.canvas",
+    "Keebs/Keyflow.md",
+    "Code/Windows.md",
+    "Code/dotNET/dotNET in Neovim.md",
+    "dotNET/Untitled.canvas",
+    "Code/dotNET",
+    "Code/Untitled 1",
+    "Code/dotNET",
+    "Untitled",
+    "Code/Projects/Alight Postman.md",
+    "Code/Projects/Alight1.md",
+    "Code/Website Performance.md",
+    "Code/Cloud/GCP.md",
+    "Code/Hotkeys/Obsidian.md",
+    "Code/Cloud/liaght.md",
+    "Keebs",
     "Images-Drawings/Pasted image 20240606222534.png",
     "Images-Drawings/Pasted image 20240606222511.png",
     "Images-Drawings/JOIN Types.png",
@@ -189,12 +197,6 @@
     "Code/OMSCS/Untitled.canvas",
     "Code/OMSCS/meow.canvas",
     "Code/OMSCS/Untitled 1.canvas",
-    "Vault Git/meow",
-    "Vault Git",
-    "~/obsidian",
-    "~",
-    "projects",
-    "OMSCS",
     "Pasted image 20231124135111.png"
   ]
 }

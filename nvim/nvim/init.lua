@@ -1,1 +1,1 @@
-require("ureshiinvim")
+require("config.lazy")
