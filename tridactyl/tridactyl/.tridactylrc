@@ -1,5 +1,5 @@
 " General Settings
-set update.lastchecktime 1715366601201
+set update.lastchecktime 1721184922272
 set update.nag true
 set update.nagwait 7
 set update.lastnaggedversion 1.24.1
@@ -62,6 +62,7 @@ set searchurls.nz https://www.notion.so/zealitconsultants/d17af203dcfc4cc48600d9
 set searchurls.gia https://github.com/CompassPHS
 set searchurls.ja https://healthnav.atlassian.net/jira/software/c/projects/NSE/boards/1287
 set searchurls.pa https://cicd.compassphs.com/go/pipelines
+set searchurls.mt https://monkeytype.com
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
