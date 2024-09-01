@@ -16,7 +16,7 @@ return {
 					local todo_comments = require("todo-comments")
 
 					-- set keymaps
-					local keymap = vim.keymap -- for conciseness
+					local keymap = vim.keymap
 
 					keymap.set("n", "]t", function()
 						todo_comments.jump_next()
@@ -83,7 +83,7 @@ return {
 			-- search through vim commands
 			vim.keymap.set("n", "<leader>vc", builtin.commands, {})
 			-- search through all TODO comments
-			vim.keymap.set("n", "<leader>do", "<cmd>TodoTelescope<cr>", { desc = "Find Todos" })
+			vim.keymap.set("n", "<leader>do", "<cmd>TodoTelescope<cr>", { desc = "Find Todos in Project" })
 			-- grep search for the smaller word under the cursor
 			vim.keymap.set("n", "<leader>cw", function()
 				builtin.grep_string({ search = vim.fn.expand("<cword>") })
@@ -103,17 +103,17 @@ return {
 			vim.keymap.set("i", "<C-g>", function()
 				return vim.fn["codeium#Accept"]()
 			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<c-;>", function()
+			vim.keymap.set("i", "<C-;>", function()
 				return vim.fn["codeium#CycleCompletions"](1)
 			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<c-,>", function()
+			vim.keymap.set("i", "<C-,>", function()
 				return vim.fn["codeium#CycleCompletions"](-1)
 			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<c-x>", function()
+			vim.keymap.set("i", "<C-x>", function()
 				return vim.fn["codeium#Clear"]()
 			end, { expr = true, silent = true })
 			-- this one tells Codeium to come up with a completion suggestion
-			vim.keymap.set("i", "<c-x>", function()
+			vim.keymap.set("i", "<C-s>", function()
 				return vim.fn["codeium#Complete"]()
 			end, { expr = true, silent = true })
 		end,
@@ -274,7 +274,7 @@ return {
 
 					-- goto definition
 					vim.keymap.set("n", "gd", function()
-						vim.lsp.buf.declaration()
+						vim.lsp.buf.definition()
 					end, opts)
 					-- look at quick info from Docs on item under hover
 					vim.keymap.set("n", "K", function()
@@ -312,8 +312,8 @@ return {
 					vim.keymap.set("n", "<leader>vn", function()
 						vim.lsp.buf.rename()
 					end, opts)
-					-- when you are typing a function call, show its signature/params
-					vim.keymap.set("i", "<leader>ms", function()
+					-- when you are over a function call, show its signature/params
+					vim.keymap.set("n", "<leader>ms", function()
 						vim.lsp.buf.signature_help()
 					end, opts)
 				end,
@@ -417,6 +417,10 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
+
+				completion = {
+					completeopt = "menu,menuone,preview,noselect",
+				},
 
 				-- tell cmp which sources to get completion info from
 				-- the order of these is the order that they will appear in the pop-up menu
@@ -573,7 +577,7 @@ return {
 			display_mode = "float", -- The display mode. Can be "float" or "split" or "horizontal-split".
 			show_prompt = false, -- Shows the prompt submitted to Ollama.
 			show_model = true, -- Displays which model you are using at the beginning of your chat session.
-			no_auto_close = false, -- Never closes the window automatically.
+			no_auto_close = true, -- Never closes the window automatically.
 			hidden = false, -- Hide the generation window (if true, will implicitly set `prompt.replace = true`), requires Neovim >= 0.10
 			init = function(options)
 				pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
@@ -587,11 +591,11 @@ return {
 					.. options.port
 					.. "/api/chat -d $body"
 			end,
-			-- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
+			-- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shell-escaped).
 			-- This can also be a command string.
 			-- The executed command must return a JSON object with { response, context }
 			-- (context property is optional).
-			-- list_models = '<omitted lua function>', -- Retrieves a list of model names
+			list_models = "<c-l>", -- Retrieves a list of model names
 			debug = false, -- Prints errors and the command which is run.
 		},
 	},
