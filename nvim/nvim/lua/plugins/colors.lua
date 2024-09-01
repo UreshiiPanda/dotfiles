@@ -13,8 +13,8 @@ function cme(color)
     -- Override other highlight groups if needed
     vim.api.nvim_set_hl(0, 'LineNr', { bg = 'none' })
     vim.api.nvim_set_hl(0, "Sidebar", { bg = "none" }) 
-    vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
-    vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
+   -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+   -- vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
 end
 
 

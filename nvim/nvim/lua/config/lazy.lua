@@ -128,13 +128,6 @@ vim.keymap.set("n", "<leader>hh", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- these next 2 are just for Twitch and Prime doesn't say why 
-vim.keymap.set("n", "<leader>vwm", function()
-    require("vim-with-me").StartVimWithMe()
-end)
-vim.keymap.set("n", "<leader>svwm", function()
-    require("vim-with-me").StopVimWithMe()
-end)
 
 -- this is for pasting the curr yanked item into some 2nd item to replace
 -- that 2nd item. This makes it so that the curr yanked item stays in that
