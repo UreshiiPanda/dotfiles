@@ -566,41 +566,6 @@ return {
 	},
 
 	{
-		"David-Kunz/gen.nvim",
-		opts = {
-			model = "llama3.1", -- The default model to use.
-			quit_map = "q", -- set keymap for close the response window
-			retry_map = "<c-r>", -- set keymap to re-send the current prompt
-			accept_map = "<c-cr>", -- set keymap to replace the previous selection with the last result
-			host = "localhost", -- The host running the Ollama service.
-			port = "11434", -- The port on which the Ollama service is listening.
-			display_mode = "float", -- The display mode. Can be "float" or "split" or "horizontal-split".
-			show_prompt = false, -- Shows the prompt submitted to Ollama.
-			show_model = true, -- Displays which model you are using at the beginning of your chat session.
-			no_auto_close = true, -- Never closes the window automatically.
-			hidden = false, -- Hide the generation window (if true, will implicitly set `prompt.replace = true`), requires Neovim >= 0.10
-			init = function(options)
-				pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
-			end,
-			-- Function to initialize Ollama
-			command = function(options)
-				local body = { model = options.model, stream = true }
-				return "curl --silent --no-buffer -X POST http://"
-					.. options.host
-					.. ":"
-					.. options.port
-					.. "/api/chat -d $body"
-			end,
-			-- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shell-escaped).
-			-- This can also be a command string.
-			-- The executed command must return a JSON object with { response, context }
-			-- (context property is optional).
-			list_models = "<c-l>", -- Retrieves a list of model names
-			debug = false, -- Prints errors and the command which is run.
-		},
-	},
-
-	{
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		opts = {},
@@ -684,6 +649,78 @@ return {
 			vim.keymap.set("n", "<leader>li", function()
 				lint.try_lint()
 			end, { desc = "Trigger linting for current file" })
+		end,
+	},
+
+	-- AI Chat
+	{
+		"robitx/gp.nvim",
+		config = function()
+			local conf = {
+				providers = {
+					anthropic = {
+						endpoint = "https://api.anthropic.com/v1/messages",
+						secret = os.getenv("ANTHROPIC_API_KEY"),
+					},
+					ollama = {
+						endpoint = "http://localhost:11434/v1/chat/completions",
+						disable = true,
+						secret = "put_secret_here",
+					},
+				},
+				-- if you want to set a custom agent, set diable to false
+				agents = {
+					{
+						provider = "anthropic",
+						name = "ChatClaude-3-5-Sonnet",
+						disable = true,
+						chat = true,
+						command = false,
+						-- string with model name or table with model name and parameters
+						model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
+						-- system prompt (use this to specify the persona/role of the AI)
+						system_prompt = require("gp.defaults").chat_system_prompt,
+						--system_prompt = "You are a general AI assistant.",
+					},
+					{
+						provider = "ollama",
+						name = "ChatOllamaLlama3.1-8B",
+						disable = true,
+						chat = true,
+						command = false,
+						-- string with model name or table with model name and parameters
+						model = {
+							model = "llama3.1",
+							temperature = 0.6,
+							top_p = 1,
+							min_p = 0.05,
+						},
+						-- system prompt (use this to specify the persona/role of the AI)
+						system_prompt = "You are a general AI assistant.",
+					},
+				},
+				-- chat_user_prefix = "💬:",
+
+				-- chat assistant prompt prefix (static string or a table {static, template})
+				-- first string has to be static, second string can contain template {{agent}}
+				-- just a static string is legacy and the [{{agent}}] element is added automatically
+				-- if you really want just a static string, make it a table with one element { "🤖:" }
+
+				-- chat_assistant_prefix = { "🤖:", "[{{agent}}]" },
+
+				-- local shortcuts bound to the chat buffer
+				-- (be careful to choose something which will work across specified modes)
+				chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g><C-g>" },
+				chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>d" },
+				chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>s" },
+				chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>c" },
+
+				-- how to display GpChatToggle or GpContext: popup / split / vsplit / tabnew
+				toggle_target = "vsplit",
+			}
+			require("gp").setup(conf)
+
+			-- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
 		end,
 	},
 }

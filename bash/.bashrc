@@ -73,3 +73,5 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
+
+export PATH=$PATH:/Users/jojo/.spicetify

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODO.md",
+                "file": "Code/AI/RAG Pipelines.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "TODO.md",
+                "file": "Code/AI/RAG Pipelines.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "TODO.md",
+                "file": "Code/AI/RAG Pipelines.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TODO.md"
+                "file": "Code/AI/RAG Pipelines.md"
               }
             }
           },
@@ -147,17 +147,21 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
-    "Code/Hotkeys/Neovim.md",
+    "OneBag.md",
     "TODO.md",
+    "Code/AI/RAG Pipelines.md",
+    "Anime-Manga/Manga.md",
+    "Code/Django/DHAT-Setup.md",
+    "Code/OCR.md",
+    "Code/Hotkeys/Spicetify.md",
+    "Code/Hotkeys/Neovim.md",
     "Keebs/Keebs Overview.md",
     "Code/Golang/GHAT.md",
-    "Code/AI/RAG Pipelines.md",
     "Code/AI",
     "Code/Portfolio.md",
     "Code/Tailwind",
     "Code/Golang",
     "Code/Projects/Edu-Kunan-Site-Design.md",
-    "Code/Django/DHAT-Setup.md",
     "Code/Tailwind/Tailwind Components.md",
     "Keebs/Swoop.md",
     "Code/Projects/swoop[.md",
@@ -165,7 +169,6 @@
     "Japanese/Keigo.md",
     "Japanese/Ageru-Kureru-Morau.md",
     "Anime-Manga/Anime-Movies.md",
-    "Anime-Manga/Manga.md",
     "Anime-Manga/Anime-Shows.md",
     "Anime-Manga/anime.md",
     "Images-Drawings/Nihongo_Choukai.pdf",
@@ -181,9 +184,6 @@
     "Code/dotNET",
     "Untitled",
     "Code/Projects/Alight Postman.md",
-    "Code/Projects/Alight1.md",
-    "Code/Website Performance.md",
-    "Code/Cloud/GCP.md",
     "Keebs",
     "Images-Drawings/Pasted image 20240606222534.png",
     "Images-Drawings/Pasted image 20240606222511.png",

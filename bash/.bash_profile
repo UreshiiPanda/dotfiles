@@ -7,3 +7,5 @@ source .bashrc
 
 
 
+
+export PATH=$PATH:/Users/jojo/.spicetify
