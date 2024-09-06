@@ -75,3 +75,6 @@ source <(ng completion script)
 
 
 export PATH=$PATH:/Users/jojo/.spicetify
+
+# Created by `pipx` on 2024-09-05 22:56:41
+export PATH="$PATH:/Users/jojo/.local/bin"

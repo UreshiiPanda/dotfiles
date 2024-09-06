@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Code/AI/RAG Pipelines.md",
+                "file": "Code/Hotkeys/Fugitive.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Code/AI/RAG Pipelines.md",
+                "file": "Code/Hotkeys/Fugitive.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Code/AI/RAG Pipelines.md",
+                "file": "Code/Hotkeys/Fugitive.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Code/AI/RAG Pipelines.md"
+                "file": "Code/Hotkeys/Fugitive.md"
               }
             }
           },
@@ -147,14 +147,14 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
-    "OneBag.md",
+    "Code/Hotkeys/Neovim.md",
     "TODO.md",
     "Code/AI/RAG Pipelines.md",
+    "OneBag.md",
     "Anime-Manga/Manga.md",
     "Code/Django/DHAT-Setup.md",
     "Code/OCR.md",
     "Code/Hotkeys/Spicetify.md",
-    "Code/Hotkeys/Neovim.md",
     "Keebs/Keebs Overview.md",
     "Code/Golang/GHAT.md",
     "Code/AI",

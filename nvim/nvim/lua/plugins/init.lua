@@ -345,7 +345,7 @@ return {
 					"markdown_oxide",
 					"pyright",
 					"sqlls",
-					"tsserver",
+					"ts_ls",
 					"yamlls",
 				},
 
