@@ -266,6 +266,14 @@ return {
 			{ "j-hui/fidget.nvim", event = { "BufReadPre", "BufNewFile" } },
 		},
 		config = function()
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+				border = "rounded",
+			})
+
+			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+				border = "rounded",
+			})
+
 			-- LspAttach will perform these only after a given LSP attaches to the buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
@@ -326,7 +334,11 @@ return {
 			require("fidget").setup({})
 			-- incorporate Mason for LSP management
 			-- see lang servers by typing in:    :Mason
-			require("mason").setup({})
+			require("mason").setup({
+				ui = {
+					border = "rounded",
+				},
+			})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"vimls",
@@ -456,6 +468,12 @@ return {
 						ellipsis_char = "...",
 					}),
 				},
+
+				-- add window borders to cmp and cmp previews
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
 			})
 
 			vim.diagnostic.config({
@@ -468,10 +486,10 @@ return {
 					focusable = false,
 					style = "minimal",
 					border = "rounded",
-					source = "always",
 					header = "",
 					prefix = "",
 				},
+				print("Diagnostic config applied"),
 			})
 		end,
 	},

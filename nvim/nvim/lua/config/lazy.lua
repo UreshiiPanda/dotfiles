@@ -1,22 +1,19 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
-
-
-
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
@@ -42,7 +39,7 @@ vim.opt.smartindent = true
 -- turn off line wrapping
 vim.opt.wrap = false
 
--- stop vim from auto-backups 
+-- stop vim from auto-backups
 vim.opt.swapfile = false
 vim.opt.backup = false
 
@@ -75,9 +72,6 @@ vim.opt.updatetime = 50
 -- get rid of nvim auto-comments
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
-
-
-
 -- global remaps
 
 --remap horizontal buffer split
@@ -87,13 +81,13 @@ vim.keymap.set("n", "<leader>bh", "<cmd>split<CR>")
 vim.keymap.set("n", "<leader>bv", "<cmd>vsplit<CR>")
 
 -- remap jump-to-end-of-line
-vim.keymap.set({"n", "v"}, "<leader>nd", "$")
+vim.keymap.set({ "n", "v" }, "<leader>nd", "$")
 
 --remap jump-to-start-of-line
-vim.keymap.set({"n","v"}, "<leader>st", "^")
+vim.keymap.set({ "n", "v" }, "<leader>st", "^")
 
 -- remap redo key to "r"
-vim.keymap.set("n", "r", vim.cmd.redo, {noremap = true})
+vim.keymap.set("n", "r", vim.cmd.redo, { noremap = true })
 
 -- remap ctrl-w buffer switcher
 vim.keymap.set("n", "<leader>w", "<C-w>")
@@ -105,7 +99,7 @@ vim.keymap.set("n", "gb", "<C-t>")
 vim.keymap.set("n", "<leader>ee", vim.cmd.Ex)
 
 -- remapping for Visual Block mode
-vim.keymap.set({"n", "v"}, "<leader>vv", "<C-v>")
+vim.keymap.set({ "n", "v" }, "<leader>vv", "<C-v>")
 
 -- when highlighting in visual mode, you can move the entire highlighted
 -- sections with capital J, K, L, H
@@ -128,24 +122,24 @@ vim.keymap.set("n", "<leader>hh", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-
 -- this is for pasting the curr yanked item into some 2nd item to replace
 -- that 2nd item. This makes it so that the curr yanked item stays in that
 -- yanked buffer after you replace any item with it
 -- if you just use p for replace, that 2nd item would then be in the buffer
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
--- y will yank only within Vim, but now leader-y will yank to system Clipboard 
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+-- y will yank only within Vim, but now leader-y will yank to system Clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-
--- I actually can't tell what this does
+-- this one deletes the selected text to the _ register (the black hole register)
 -- vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
+-- Visual mode mapping: Delete and copy to system clipboard
+vim.keymap.set("v", "<leader>dd", '"+d', { noremap = true, silent = true })
 
 -- don't allow Q to be pressed with "no press"
 vim.keymap.set("n", "Q", "<nop>")
-
 
 -- these next 4 are for quick-fix navigation in Vim
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -162,22 +156,23 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- this is for :so %  which is "source curr NeoVim config file"
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("luafile $MYVIMRC")
+	vim.cmd("luafile $MYVIMRC")
 end)
-
-
-
-
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  spec = {
-    -- import your plugins
-    { import = "plugins" },
-  },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
+	spec = {
+		-- import your plugins
+		{ import = "plugins" },
+	},
+	{
+		ui = {
+			border = "rounded",
+		},
+	},
+	-- Configure any other settings here. See the documentation for more details.
+	-- colorscheme that will be used when installing plugins.
+	install = { colorscheme = { "habamax" } },
+	-- automatically check for plugin updates
+	checker = { enabled = true },
 })

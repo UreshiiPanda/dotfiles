@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Code/Hotkeys/Fugitive.md",
+                "file": "TODO.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Code/Hotkeys/Fugitive.md",
+                "file": "TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Code/Hotkeys/Fugitive.md",
+                "file": "TODO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Code/Hotkeys/Fugitive.md"
+                "file": "TODO.md"
               }
             }
           },
@@ -147,6 +147,7 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
+    "Code/Hotkeys/Fugitive.md",
     "Code/Hotkeys/Neovim.md",
     "TODO.md",
     "Code/AI/RAG Pipelines.md",
@@ -183,7 +184,6 @@
     "Code/Untitled 1",
     "Code/dotNET",
     "Untitled",
-    "Code/Projects/Alight Postman.md",
     "Keebs",
     "Images-Drawings/Pasted image 20240606222534.png",
     "Images-Drawings/Pasted image 20240606222511.png",
