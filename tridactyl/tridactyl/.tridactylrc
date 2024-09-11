@@ -1,5 +1,5 @@
 " General Settings
-set update.lastchecktime 1721184922272
+set update.lastchecktime 1725323545082
 set update.nag true
 set update.nagwait 7
 set update.lastnaggedversion 1.24.1
@@ -63,6 +63,7 @@ set searchurls.gia https://github.com/CompassPHS
 set searchurls.ja https://healthnav.atlassian.net/jira/software/c/projects/NSE/boards/1287
 set searchurls.pa https://cicd.compassphs.com/go/pipelines
 set searchurls.mt https://monkeytype.com
+set searchurls.adp https://online.adp.com/signin/v1/?APPID=Pin4NAS&productId=80e309c3-709e-bae1-e053-3505430b5495&returnURL=https://login.adp.com&callingAppId=landing&TARGET=-SM-https://login.adp.com/ee/getProducts?event=Next&userSelected=anActiveEmployee&transId=899-P21-5BKYZF
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300

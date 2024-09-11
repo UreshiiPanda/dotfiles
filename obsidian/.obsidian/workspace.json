@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODO.md",
+                "file": "OneBag.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "TODO.md",
+                "file": "OneBag.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "TODO.md",
+                "file": "OneBag.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TODO.md"
+                "file": "OneBag.md"
               }
             }
           },
@@ -147,11 +147,14 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
+    "Headphones.md",
+    "OneBag.md",
+    "TODO.md",
+    "Code/Projects/Edu-Kunan-Site-Design.md",
+    "Code/AI/cli_ai.md",
     "Code/Hotkeys/Fugitive.md",
     "Code/Hotkeys/Neovim.md",
-    "TODO.md",
     "Code/AI/RAG Pipelines.md",
-    "OneBag.md",
     "Anime-Manga/Manga.md",
     "Code/Django/DHAT-Setup.md",
     "Code/OCR.md",
@@ -162,7 +165,6 @@
     "Code/Portfolio.md",
     "Code/Tailwind",
     "Code/Golang",
-    "Code/Projects/Edu-Kunan-Site-Design.md",
     "Code/Tailwind/Tailwind Components.md",
     "Keebs/Swoop.md",
     "Code/Projects/swoop[.md",
@@ -177,8 +179,6 @@
     "Code/Interviews/Views-Short.md",
     "Keebs/Untitled.canvas",
     "Keebs/Keyflow.md",
-    "Code/Windows.md",
-    "Code/dotNET/dotNET in Neovim.md",
     "dotNET/Untitled.canvas",
     "Code/dotNET",
     "Code/Untitled 1",

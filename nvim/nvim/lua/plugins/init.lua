@@ -50,10 +50,10 @@ return {
 					path_display = { "smart" },
 					mappings = {
 						i = {
-							["<C-k>"] = actions.move_selection_previous, -- move to prev result
-							["<C-j>"] = actions.move_selection_next, -- move to next result
+							["<Tab>"] = actions.move_selection_previous, -- move to prev result
+							["<S-Tab>"] = actions.move_selection_next, -- move to next result
 							["<C-i>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
-							["<C-t>"] = trouble_telescope.open,
+							["<C-b>"] = trouble_telescope.open,
 						},
 					},
 				},
@@ -100,20 +100,20 @@ return {
 		"Exafunction/codeium.vim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			vim.keymap.set("i", "<C-g>", function()
+			vim.keymap.set("i", "<C-a>", function()
 				return vim.fn["codeium#Accept"]()
 			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<C-;>", function()
+			vim.keymap.set("i", "<C-n>", function()
 				return vim.fn["codeium#CycleCompletions"](1)
 			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<C-,>", function()
+			vim.keymap.set("i", "<C-p>", function()
 				return vim.fn["codeium#CycleCompletions"](-1)
 			end, { expr = true, silent = true })
 			vim.keymap.set("i", "<C-x>", function()
 				return vim.fn["codeium#Clear"]()
 			end, { expr = true, silent = true })
 			-- this one tells Codeium to come up with a completion suggestion
-			vim.keymap.set("i", "<C-s>", function()
+			vim.keymap.set("i", "<C-g>", function()
 				return vim.fn["codeium#Complete"]()
 			end, { expr = true, silent = true })
 		end,
@@ -140,12 +140,10 @@ return {
 					"sql",
 					"yaml",
 					"json",
-					"html",
 					"gitcommit",
 					"gitignore",
 					"go",
 					"bash",
-					"css",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -351,13 +349,11 @@ return {
 					"diagnosticls",
 					"dockerls",
 					"gopls",
-					"html",
 					"htmx",
 					"jsonls",
 					"markdown_oxide",
 					"pyright",
 					"sqlls",
-					"ts_ls",
 					"yamlls",
 				},
 
@@ -374,8 +370,6 @@ return {
 						"sqlfmt",
 						"sqlfluff",
 						"markdownlint",
-						"htmlhint",
-						"stylelint",
 						"jsonlint",
 						"yamllint",
 						"gitlint",
@@ -613,11 +607,11 @@ return {
 					django = { "djlint" },
 					sql = { "sqlfmt" },
 				},
-				format_on_save = {
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 1000,
-				},
+				--	format_on_save = {
+				--		lsp_fallback = true,
+				--		async = false,
+				--		timeout_ms = 1000,
+				--	},
 			})
 
 			-- this is a keymap for formatting a file or a range of text
@@ -644,8 +638,6 @@ return {
 				typescript = { "eslint_d" },
 				python = { "pylint" },
 				django = { "djlint" },
-				html = { "htmlhint" },
-				css = { "stylelint" },
 				json = { "jsonlint" },
 				yaml = { "yamllint" },
 				markdown = { "markdownlint" },
@@ -728,10 +720,10 @@ return {
 
 				-- local shortcuts bound to the chat buffer
 				-- (be careful to choose something which will work across specified modes)
-				chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g><C-g>" },
-				chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>d" },
-				chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>s" },
-				chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>c" },
+				chat_shortcut_respond = { modes = { "n", "v", "x" }, shortcut = "<leader>cbr" },
+				chat_shortcut_delete = { modes = { "n", "v", "x" }, shortcut = "<leader>cbd" },
+				chat_shortcut_stop = { modes = { "n", "v", "x" }, shortcut = "<leader>cbs" },
+				chat_shortcut_new = { modes = { "n", "v", "x" }, shortcut = "<leader>cbn" },
 
 				-- how to display GpChatToggle or GpContext: popup / split / vsplit / tabnew
 				toggle_target = "vsplit",
@@ -739,6 +731,43 @@ return {
 			require("gp").setup(conf)
 
 			-- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+			local function keymapOptions(desc)
+				return {
+					noremap = true,
+					silent = true,
+					nowait = true,
+					desc = "GPT prompt " .. desc,
+				}
+			end
+
+			-- chat commands
+			vim.keymap.set("n", "<leader>aiv", "<cmd>GpChatToggle vsplit<cr>", keymapOptions("Toggle Chat Vsplit"))
+			vim.keymap.set("n", "<leader>aip", "<cmd>GpChatToggle popup<cr>", keymapOptions("Toggle Chat Popup"))
+			vim.keymap.set("n", "<leader>ait", "<cmd>GpChatToggle tabnew<cr>", keymapOptions("Toggle Chat NewTab"))
+
+			vim.keymap.set("v", "<leader>aiw", ":<C-u>'<,'>GpChatPaste<cr>", keymapOptions("Visual Chat Paste"))
+			vim.keymap.set(
+				"v",
+				"<leader>aiv",
+				":<C-u>'<,'>GpChatToggle vsplit<cr>",
+				keymapOptions("Visual Toggle Chat Vsplit")
+			)
+			vim.keymap.set(
+				"v",
+				"<leader>aip",
+				":<C-u>'<,'>GpChatToggle popup<cr>",
+				keymapOptions("Visual Toggle Chat Popup")
+			)
+			vim.keymap.set(
+				"v",
+				"<leader>ait",
+				":<C-u>'<,'>GpChatToggle tabnew<cr>",
+				keymapOptions("Visual Toggle Chat NewTab")
+			)
+
+			--prompt commands
+			vim.keymap.set("n", "<C-g>j", "<cmd>GpContext<cr>", keymapOptions("Toggle Context"))
+			vim.keymap.set("v", "<C-g>j", ":<C-u>'<,'>GpContext<cr>", keymapOptions("Visual Toggle Context"))
 		end,
 	},
 }
