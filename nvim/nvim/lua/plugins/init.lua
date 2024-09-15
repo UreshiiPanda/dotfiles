@@ -440,11 +440,11 @@ return {
 				-- these are for the dropdown menu that appears for code completion suggestions
 				-- the cmp.mapping.complete shows the entire list of possibilities
 				mapping = cmp.mapping.preset.insert({
-					["<D-l>"] = cmp.mapping.select_prev_item(cmp_select),
+					["<D-k>"] = cmp.mapping.select_prev_item(cmp_select),
 					["<D-j>"] = cmp.mapping.select_next_item(cmp_select),
 					["<D-u>"] = cmp.mapping.scroll_docs(-4),
 					["<D-d>"] = cmp.mapping.scroll_docs(4),
-					["<D-i>"] = cmp.mapping.confirm({ select = true }),
+					["<D-;>"] = cmp.mapping.confirm({ select = true }),
 					["<D-f>"] = cmp.mapping.complete(),
 				}),
 
