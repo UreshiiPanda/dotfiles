@@ -64,6 +64,9 @@ set searchurls.ja https://healthnav.atlassian.net/jira/software/c/projects/NSE/b
 set searchurls.pa https://cicd.compassphs.com/go/pipelines
 set searchurls.mt https://monkeytype.com
 set searchurls.adp https://online.adp.com/signin/v1/?APPID=Pin4NAS&productId=80e309c3-709e-bae1-e053-3505430b5495&returnURL=https://login.adp.com&callingAppId=landing&TARGET=-SM-https://login.adp.com/ee/getProducts?event=Next&userSelected=anActiveEmployee&transId=899-P21-5BKYZF
+set searchurls.ad https://dev.azure.com/moregroup-inc/moregroup
+set searchurls.mam https://outlook.office365.com/mail/
+set searchurls.cu https://app.clickup.com/14105674/home
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300

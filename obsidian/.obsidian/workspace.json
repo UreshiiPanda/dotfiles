@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OneBag.md",
+                "file": "MoreGroup/More Todo.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OneBag.md",
+                "file": "MoreGroup/More Todo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OneBag.md",
+                "file": "MoreGroup/More Todo.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -115,7 +115,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OneBag.md"
+                "file": "MoreGroup/More Todo.md"
               }
             }
           },
@@ -147,9 +147,13 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
-    "Headphones.md",
-    "OneBag.md",
     "TODO.md",
+    "OneBag.md",
+    "Headphones.md",
+    "MoreGroup/More Todo.md",
+    "Code/Hotkeys/Tridactyl.md",
+    "MoreGroup/More Contacts.md",
+    "MoreGroup",
     "Code/Projects/Edu-Kunan-Site-Design.md",
     "Code/AI/cli_ai.md",
     "Code/Hotkeys/Fugitive.md",
@@ -173,18 +177,14 @@
     "Japanese/Ageru-Kureru-Morau.md",
     "Anime-Manga/Anime-Movies.md",
     "Anime-Manga/Anime-Shows.md",
-    "Anime-Manga/anime.md",
     "Images-Drawings/Nihongo_Choukai.pdf",
     "Keebs/Swoop",
-    "Code/Interviews/Views-Short.md",
     "Keebs/Untitled.canvas",
-    "Keebs/Keyflow.md",
     "dotNET/Untitled.canvas",
     "Code/dotNET",
     "Code/Untitled 1",
     "Code/dotNET",
     "Untitled",
-    "Keebs",
     "Images-Drawings/Pasted image 20240606222534.png",
     "Images-Drawings/Pasted image 20240606222511.png",
     "Images-Drawings/JOIN Types.png",
