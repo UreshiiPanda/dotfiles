@@ -67,6 +67,8 @@ set searchurls.adp https://online.adp.com/signin/v1/?APPID=Pin4NAS&productId=80e
 set searchurls.ad https://dev.azure.com/moregroup-inc/moregroup
 set searchurls.mam https://outlook.office365.com/mail/
 set searchurls.cu https://app.clickup.com/14105674/home
+set searchurls.ccf https://acc.autodesk.com/docs/files/projects/92acb028-512c-479c-be38-7d7e6fae0612?folderUrn=urn%3Aadsk.wipprod%3Afs.folder%3Aco.4RSdP7D5QJWpnd2ZVB5Npg&viewModel=detail&moduleId=folders
+set searchurls.mai localhost:3000
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
