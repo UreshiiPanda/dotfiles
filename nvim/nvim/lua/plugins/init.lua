@@ -56,6 +56,12 @@ return {
 							["<C-b>"] = trouble_telescope.open,
 						},
 					},
+                    -- Add transparency settings
+                    layout_config = {
+                        width = 0.85,
+                        height = 0.85,
+                    },
+                    winblend = 0, -- Makes the floating window transparent (0-100)
 				},
 			})
 
@@ -549,8 +555,15 @@ return {
 			vim.keymap.set("n", "<leader>zz", function()
 				require("zen-mode").setup({
 					window = {
-						width = 90,
-						options = {},
+						width = 1,
+                        height = 1,
+						options = {
+                            signcolumn = "no",  -- Hide signcolumn
+                            number = false,     -- Hide line numbers
+                            relativenumber = false, -- Hide relative line numbers
+                            cursorline = false, -- Disable the cursor line
+                            cursorcolumn = false, -- Disable the cursor column
+                        },
 					},
 				})
 				require("zen-mode").toggle()
@@ -774,6 +787,32 @@ return {
     "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
         version = "*", -- Pin Neorg to the latest stable release
-        config = true,
+        config = function()
+        require("neorg").setup {
+          load = {
+            ["core.defaults"] = {},
+            ["core.concealer"] = {},
+            ["core.dirman"] = {
+              config = {
+                workspaces = {
+                  notes = "~/notes",
+                },
+                default_workspace = "notes",
+              },
+            },
+          },
+        }
+  
+        vim.wo.foldlevel = 99
+        vim.wo.conceallevel = 2
+      end,
+    },
+    {
+        "dhruvasagar/vim-table-mode",
+                config = function()
+            -- Key mappings for vim-table-mode
+            -- Toggle TableMode on/off
+            vim.api.nvim_set_keymap("n", "<Leader>tm", ":TableModeToggle<CR>", { noremap = true, silent = true })
+        end
     },
 }

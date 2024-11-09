@@ -58,7 +58,13 @@ vim.opt.hlsearch = false
 -- also wild-card searches with * just like Bash does
 vim.opt.incsearch = true
 
-vim.opt.termguicolors = true
+-- Add these global transparency settings after the Lazy setup
+vim.opt.winblend = 0      -- Enable window transparency
+vim.opt.pumblend = 0      -- Enable popup menu transparency
+vim.opt.termguicolors = true -- Enable true color support
+-- this sets the background to transparent
+vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
 
 -- this sets the numbers below the curr line to start again from 1
 -- and it makes sure that there are at least 8 more nums listed
@@ -176,18 +182,33 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Setup lazy.nvim
 require("lazy").setup({
-	spec = {
-		-- import your plugins
-		{ import = "plugins" },
-	},
-	{
-		ui = {
-			border = "rounded",
-		},
-	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "habamax" } },
-	-- automatically check for plugin updates
-	checker = { enabled = true },
+    spec = {
+        -- import your plugins
+        { import = "plugins" },
+    },
+    ui = {  -- Remove the extra curly brace that was here
+        border = "rounded",
+        winblend = 0,  -- Makes Lazy's windows transparent
+        -- Add these settings to maintain visible borders
+        title = "Lazy",
+        border_chars = {
+            "╭", "─", "╮", "│", "╯", "─", "╰", "│"
+        },
+    },
+    -- Configure any other settings here. See the documentation for more details.
+    -- colorscheme that will be used when installing plugins.
+    install = { colorscheme = { "habamax" } },
+    -- automatically check for plugin updates
+    checker = { enabled = true },
+})
+
+-- Add this to ensure borders are visible with transparency
+vim.api.nvim_set_hl(0, "LazyNormal", { 
+    bg = "NONE",
+})
+
+-- If borders still aren't visible enough, you can explicitly set the border color
+vim.api.nvim_set_hl(0, "LazyBorder", {
+    fg = "#9cabca",  -- Adjust this color to match your theme
+    bg = "NONE"
 })

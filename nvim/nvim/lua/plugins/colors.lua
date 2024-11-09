@@ -2,7 +2,7 @@
 -- and any color can be passed in as a string
 function cme(color)
 	-- default color set below for when no color is passed in
-	color = color or "space-vim-dark"
+	color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
 
 	-- to set bg transparency
@@ -27,14 +27,7 @@ return {
 	-- ColorScheme:  space-vim-dark
 	{
 		"liuchengxu/space-vim-dark",
-		-- make sure we load this during startup if it is your main colorscheme
-		lazy = false,
-		-- make sure to load this before all the other start plugins
-		priority = 1000,
 		name = "space-vim-dark",
-		config = function()
-			cme("space-vim-dark")
-		end,
 	},
 
 	-- ColorScheme:    Tokyo Night
@@ -49,13 +42,33 @@ return {
 
 	-- ColorScheme:    Rose-Pine
 	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		config = function()
-			require("rose-pine").setup({
-				disable_background = true,
-			})
-		end,
+        "rose-pine/neovim",
+        name = "rose-pine",
+        -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,
+        -- make sure to load this before all the other start plugins
+        priority = 1000,
+        config = function()
+            require("rose-pine").setup({
+                disable_background = true,
+                variant = 'main', -- auto, main, moon, or dawn
+                dark_variant = 'main', -- main, moon, or dawn
+                dim_inactive_windows = false,
+                extend_background_behind_borders = true,
+                styles = {
+                    bold = true,
+                    italic = true,
+                    transparency = true,
+                },
+                highlight_groups = {
+                    Normal = { bg = "NONE" },
+                    NormalFloat = { bg = "NONE" },
+                    TelescopeNormal = { bg = "NONE" },
+                    TelescopeBorder = { bg = "NONE" },
+                },
+            })
+            cme("rose-pine")
+            end,
 	},
 
 	-- Colorscheme:  Everforest
