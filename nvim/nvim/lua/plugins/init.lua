@@ -770,4 +770,10 @@ return {
 			vim.keymap.set("v", "<C-g>j", ":<C-u>'<,'>GpContext<cr>", keymapOptions("Visual Toggle Context"))
 		end,
 	},
+    {
+    "nvim-neorg/neorg",
+        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+        version = "*", -- Pin Neorg to the latest stable release
+        config = true,
+    },
 }
