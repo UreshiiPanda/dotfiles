@@ -11,10 +11,12 @@
             "id": "91e6e810db392ea8",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.7.6"
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Release Notes 1.7.6"
             }
           }
         ]
@@ -156,6 +158,8 @@
   },
   "active": "91e6e810db392ea8",
   "lastOpenFiles": [
+    "Code/Portfolio.md",
+    "Code/Git.md",
     "MoreGroup/More Todo.md",
     "Code/ssh.md",
     "~/dotfiles/obs2/TODO.md",
@@ -192,8 +196,6 @@
     "~/dotfiles/obs2/Images-Drawings",
     "~/dotfiles/obs2/Headphones.md",
     "~/dotfiles/obs2/Code/dotNET/dotNET in Neovim.md",
-    "~/dotfiles/obs2/Code/Tailwind/Tailwind Components.md",
-    "~/dotfiles/obs2/Code/Projects/Zeal.md",
     "~/dotfiles/obs2/Code/dotNET",
     "~/dotfiles/obs2/Code/Tailwind",
     "Keebs/Untitled.canvas",

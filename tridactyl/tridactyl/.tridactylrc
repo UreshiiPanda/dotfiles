@@ -69,6 +69,10 @@ set searchurls.mam https://outlook.office365.com/mail/
 set searchurls.cu https://app.clickup.com/14105674/home
 set searchurls.ccf https://acc.autodesk.com/docs/files/projects/92acb028-512c-479c-be38-7d7e6fae0612?folderUrn=urn%3Aadsk.wipprod%3Afs.folder%3Aco.4RSdP7D5QJWpnd2ZVB5Npg&viewModel=detail&moduleId=folders
 set searchurls.mai localhost:3000
+set searchurls.sap https://us2.concursolutions.com/nui/expense
+set searchurls.acc https://acc.autodesk.com/home?referrer_url=https%3A%2F%2Facc.autodesk.com%2Finsight%2Faccounts%2Ff7da234a-5f7b-4adc-85b5-3836bf17916a%2Fdata%2Fpowerbi-template-gallery
+set searchurls.ol https://outlook.office.com/mail/
+set searchurls.az https://dev.azure.com/moregroup-inc/moregroup/_boards/board/t/moregroup%20Team/Backlog%20items
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
