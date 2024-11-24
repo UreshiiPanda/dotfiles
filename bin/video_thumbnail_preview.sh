@@ -1,0 +1,1 @@
+../scripts/video_thumbnail_preview.sh

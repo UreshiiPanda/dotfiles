@@ -1,0 +1,1 @@
+../scripts/fzf_preview.sh
