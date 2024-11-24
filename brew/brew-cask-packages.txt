@@ -1,0 +1,8 @@
+dotnet-sdk
+font-maple
+font-maple-mono
+google-cloud-sdk
+karabiner-elements
+kitty
+maccy
+qmk-toolbox
