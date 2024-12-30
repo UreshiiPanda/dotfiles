@@ -98,6 +98,8 @@ return {
 			vim.keymap.set("n", "<leader>cW", function()
 				builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
 			end)
+            -- Key mappings for Telescope
+            vim.keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>", { desc = "Search Keymaps" })
 		end,
 	},
 
@@ -813,6 +815,8 @@ return {
             -- Key mappings for vim-table-mode
             -- Toggle TableMode on/off
             vim.api.nvim_set_keymap("n", "<Leader>tm", ":TableModeToggle<CR>", { noremap = true, silent = true })
+                    -- Remap Tableize to <Leader>tts
+            vim.api.nvim_set_keymap("n", "<Leader>tts", ":Tableize<CR>", { noremap = true, silent = true })
         end
     },
 }
