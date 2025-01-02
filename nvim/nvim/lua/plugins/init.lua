@@ -20,11 +20,11 @@ return {
 
 					keymap.set("n", "]t", function()
 						todo_comments.jump_next()
-					end, { desc = "Next todo comment" })
+					end, { desc = "Todo-Comments: Jump to next todo comment" })
 
 					keymap.set("n", "[t", function()
 						todo_comments.jump_prev()
-					end, { desc = "Previous todo comment" })
+					end, { desc = "Todo-Comments: Jump to previous todo comment" })
 
 					todo_comments.setup()
 				end,
@@ -38,7 +38,6 @@ return {
 			local trouble = require("trouble")
 			local trouble_telescope = require("trouble.sources.telescope")
 
-			-- or create your custom action
 			local custom_actions = transform_mod({
 				open_trouble_qflist = function(prompt_bufnr)
 					trouble.toggle("quickfix")
@@ -50,56 +49,52 @@ return {
 					path_display = { "smart" },
 					mappings = {
 						i = {
-							["<Tab>"] = actions.move_selection_previous, -- move to prev result
-							["<S-Tab>"] = actions.move_selection_next, -- move to next result
+							["<Tab>"] = actions.move_selection_previous,
+							["<S-Tab>"] = actions.move_selection_next,
 							["<C-i>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
 							["<C-b>"] = trouble_telescope.open,
 						},
 					},
-                    -- Add transparency settings
-                    layout_config = {
-                        width = 0.85,
-                        height = 0.85,
-                    },
-                    winblend = 0, -- Makes the floating window transparent (0-100)
+					layout_config = {
+						width = 0.85,
+						height = 0.85,
+					},
+					winblend = 0,
 				},
 			})
 
 			local builtin = require("telescope.builtin")
-			-- search thru all files
-			-- tell Telescope to not ignore hiddens, but then tell it to still ignore the .git dir
 			vim.keymap.set("n", "<leader>f", function()
 				builtin.find_files({
 					no_ignore = true,
 					hidden = true,
 					file_ignore_patterns = { ".git/", "node_modules/", ".DS_Store" },
 				})
-			end, {})
-			-- search thru only git files
-			-- Fuzzy search through the output of git ls-files command, respects .gitignore
-			vim.keymap.set("n", "<leader>gi", builtin.git_files, {})
-			-- run grep from a file
-			-- Searches for the string under your cursor or selection in your current working directory
-			vim.keymap.set("n", "<leader>gg", "<cmd>Telescope grep_string<cr>", {})
-			-- Search for a string in your current working directory and
-			-- get results live as you type, respects .gitignore. (Requires ripgrep)
-			vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
-			-- search through vim help keywords
-			vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
-			-- search through vim commands
-			vim.keymap.set("n", "<leader>vc", builtin.commands, {})
-			-- search through all TODO comments
-			vim.keymap.set("n", "<leader>do", "<cmd>TodoTelescope<cr>", { desc = "Find Todos in Project" })
-			-- grep search for the smaller word under the cursor
+			end, { desc = "Telescope: Find files (including hidden)" })
+
+			vim.keymap.set("n", "<leader>gi", builtin.git_files, { desc = "Telescope: Search git files" })
+			vim.keymap.set(
+				"n",
+				"<leader>gg",
+				"<cmd>Telescope grep_string<cr>",
+				{ desc = "Telescope: Grep string under cursor" }
+			)
+			vim.keymap.set("n", "<leader>lg", builtin.live_grep, { desc = "Telescope: Live grep" })
+			vim.keymap.set("n", "<leader>vh", builtin.help_tags, { desc = "Telescope: Search help tags" })
+			vim.keymap.set("n", "<leader>vc", builtin.commands, { desc = "Telescope: Search commands" })
+			vim.keymap.set(
+				"n",
+				"<leader>do",
+				"<cmd>TodoTelescope<cr>",
+				{ desc = "Telescope Todo-Comments: Find todos in project" }
+			)
 			vim.keymap.set("n", "<leader>cw", function()
 				builtin.grep_string({ search = vim.fn.expand("<cword>") })
-			end)
-			-- grep search for the entire word/phrase under the cursor
+			end, { desc = "Telescope: Grep word under cursor" })
 			vim.keymap.set("n", "<leader>cW", function()
 				builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
-			end)
-            -- Key mappings for Telescope
-            vim.keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>", { desc = "Search Keymaps" })
+			end, { desc = "Telescope: Grep WORD under cursor" })
+			vim.keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>", { desc = "Telescope: Search keymaps" })
 		end,
 	},
 
@@ -110,20 +105,73 @@ return {
 		config = function()
 			vim.keymap.set("i", "<C-a>", function()
 				return vim.fn["codeium#Accept"]()
-			end, { expr = true, silent = true })
+			end, { expr = true, silent = true, desc = "Codeium: Accept suggestion" })
 			vim.keymap.set("i", "<C-n>", function()
 				return vim.fn["codeium#CycleCompletions"](1)
-			end, { expr = true, silent = true })
+			end, { expr = true, silent = true, desc = "Codeium: Next suggestion" })
 			vim.keymap.set("i", "<C-p>", function()
 				return vim.fn["codeium#CycleCompletions"](-1)
-			end, { expr = true, silent = true })
+			end, { expr = true, silent = true, desc = "Codeium: Previous suggestion" })
 			vim.keymap.set("i", "<C-x>", function()
 				return vim.fn["codeium#Clear"]()
-			end, { expr = true, silent = true })
-			-- this one tells Codeium to come up with a completion suggestion
+			end, { expr = true, silent = true, desc = "Codeium: Clear suggestions" })
 			vim.keymap.set("i", "<C-g>", function()
 				return vim.fn["codeium#Complete"]()
-			end, { expr = true, silent = true })
+			end, { expr = true, silent = true, desc = "Codeium: Trigger completion" })
+		end,
+	},
+
+	-- Harpoon
+	{
+		"ThePrimeagen/harpoon",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+		},
+		config = function()
+			local mark = require("harpoon.mark")
+			local ui = require("harpoon.ui")
+
+			vim.keymap.set("n", "<leader>af", mark.add_file, { desc = "Harpoon: Add file to marks" })
+			vim.keymap.set("n", "<leader>qm", ui.toggle_quick_menu, { desc = "Harpoon: Toggle quick menu" })
+
+			vim.keymap.set("n", "<leader>1", function()
+				ui.nav_file(1)
+			end, { desc = "Harpoon: Navigate to file 1" })
+			vim.keymap.set("n", "<leader>2", function()
+				ui.nav_file(2)
+			end, { desc = "Harpoon: Navigate to file 2" })
+			vim.keymap.set("n", "<leader>3", function()
+				ui.nav_file(3)
+			end, { desc = "Harpoon: Navigate to file 3" })
+			vim.keymap.set("n", "<leader>4", function()
+				ui.nav_file(4)
+			end, { desc = "Harpoon: Navigate to file 4" })
+		end,
+	},
+
+	-- UndoTree
+	{
+		"mbbill/undotree",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "UndoTree: Toggle undo tree" })
+			vim.keymap.set("n", "<leader>uf", "<cmd>UndotreeFocus<CR>", { desc = "UndoTree: Focus undo tree" })
+
+			vim.g.undotree_WindowLayout = 2
+			vim.g.undotree_SetFocusWhenToggle = 1
+		end,
+	},
+
+	-- Git Fugitive
+	{
+		"tpope/vim-fugitive",
+		config = function()
+			vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Fugitive: Git status" })
+			vim.keymap.set("n", "<leader>gp", function()
+				vim.cmd.Git("push")
+			end, { desc = "Fugitive: Git push" })
+			vim.keymap.set("n", "gh", "<cmd>diffget //2<CR>", { desc = "Fugitive: Get diff from left" })
+			vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>", { desc = "Fugitive: Get diff from right" })
 		end,
 	},
 
@@ -173,66 +221,6 @@ return {
 					additional_vim_regex_highlighting = false,
 				},
 			})
-		end,
-	},
-
-	-- Harpoon
-	{
-		"ThePrimeagen/harpoon",
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-		},
-		config = function()
-			local mark = require("harpoon.mark")
-			local ui = require("harpoon.ui")
-
-			vim.keymap.set("n", "<leader>af", mark.add_file)
-			vim.keymap.set("n", "<leader>qm", ui.toggle_quick_menu)
-
-			vim.keymap.set("n", "<leader>1", function()
-				ui.nav_file(1)
-			end)
-			vim.keymap.set("n", "<leader>2", function()
-				ui.nav_file(2)
-			end)
-			vim.keymap.set("n", "<leader>3", function()
-				ui.nav_file(3)
-			end)
-			vim.keymap.set("n", "<leader>4", function()
-				ui.nav_file(4)
-			end)
-		end,
-	},
-
-	-- UndoTree
-	{
-		"mbbill/undotree",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
-			vim.keymap.set("n", "<leader>uf", "<cmd>UndotreeFocus<CR>")
-
-			vim.g.undotree_WindowLayout = 2
-			vim.g.undotree_SetFocusWhenToggle = 1
-		end,
-	},
-
-	-- Git Fugitive
-	{
-		"tpope/vim-fugitive",
-		config = function()
-			-- pull up Fugitive's "git status" buffer
-			vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
-			-- git push
-			vim.keymap.set("n", "<leader>gp", function()
-				vim.cmd.Git("push")
-			end, opts)
-
-			-- these are for vDiff (vd) when performing a merge conflict btw 2 options
-			-- and you can choose R side with "gl" and L side with "gh"
-			vim.keymap.set("n", "gh", "<cmd>diffget //2<CR>")
-			vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
 		end,
 	},
 
@@ -286,50 +274,36 @@ return {
 				callback = function(event)
 					local opts = { buffer = event.buf }
 
-					-- goto definition
 					vim.keymap.set("n", "gd", function()
 						vim.lsp.buf.definition()
-					end, opts)
-					-- look at quick info from Docs on item under hover
+					end, { buffer = event.buf, desc = "LSP: Go to definition" })
 					vim.keymap.set("n", "K", function()
 						vim.lsp.buf.hover()
-					end, opts)
-					-- this is a way that the LSP can detect symbols across your entire curr workspace,
-					-- instead of just curr file. But some LSPs can't do this or need some sort of setup
-					-- file to do this  (eg: JS has a package.json which allows the LSP to detect the curr
-					-- "workspace" and all files/symbols in it
+					end, { buffer = event.buf, desc = "LSP: Show hover documentation" })
 					vim.keymap.set("n", "<leader>vw", function()
 						vim.lsp.buf.workspace_symbol()
-					end, opts)
-					-- open a quick diagnostic info on error/warning under the cursor
-					vim.keymap.set("n", "<leader>vd", function()
+					end, { buffer = event.buf, desc = "LSP: Search workspace symbols" })
+					vim.keymap.set("n", "<leader>dl", function()
 						vim.diagnostic.open_float()
-					end, opts)
-					-- goto next diagnostic in file
+					end, { buffer = event.buf, desc = "LSP: Show diagnostics in float" })
 					vim.keymap.set("n", "[d", function()
 						vim.diagnostic.goto_next()
-					end, opts)
-					-- goto prev diagnostic in file
+					end, { buffer = event.buf, desc = "LSP: Go to next diagnostic" })
 					vim.keymap.set("n", "]d", function()
 						vim.diagnostic.goto_prev()
-					end, opts)
-					-- see which code-actions the LSP server offers for the item under the cursor
-					-- some LSPs do not provide any code actions
+					end, { buffer = event.buf, desc = "LSP: Go to previous diagnostic" })
 					vim.keymap.set("n", "<leader>ca", function()
 						vim.lsp.buf.code_action()
-					end, opts)
-					-- show all refs to the item under the cursor in this file
+					end, { buffer = event.buf, desc = "LSP: Show code actions" })
 					vim.keymap.set("n", "<leader>vr", function()
 						vim.lsp.buf.references()
-					end, opts)
-					-- rename the var under the cursor everywhere it occurs in the file
+					end, { buffer = event.buf, desc = "LSP: Find references" })
 					vim.keymap.set("n", "<leader>vn", function()
 						vim.lsp.buf.rename()
-					end, opts)
-					-- when you are over a function call, show its signature/params
+					end, { buffer = event.buf, desc = "LSP: Rename symbol" })
 					vim.keymap.set("n", "<leader>ms", function()
 						vim.lsp.buf.signature_help()
-					end, opts)
+					end, { buffer = event.buf, desc = "LSP: Show signature help" })
 				end,
 			})
 
@@ -477,35 +451,30 @@ return {
 					documentation = cmp.config.window.bordered(),
 				},
 			})
-
-			vim.diagnostic.config({
-				virtual_text = true,
-				signs = true,
-				underline = true,
-				update_in_insert = false,
-				severity_sort = true,
-				float = {
-					focusable = false,
-					style = "minimal",
-					border = "rounded",
-					header = "",
-					prefix = "",
-				},
-				print("Diagnostic config applied"),
-			})
 		end,
 	},
 
 	-- for useless animations
+	-- Cellular Automaton
 	{
 		"eandrju/cellular-automaton.nvim",
 		config = function()
-			vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
-			vim.keymap.set("n", "<leader>gl", "<cmd>CellularAutomaton game_of_life<CR>")
+			vim.keymap.set(
+				"n",
+				"<leader>mr",
+				"<cmd>CellularAutomaton make_it_rain<CR>",
+				{ desc = "Cellular-Automaton: Make it rain effect" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>gl",
+				"<cmd>CellularAutomaton game_of_life<CR>",
+				{ desc = "Cellular-Automaton: Game of Life" }
+			)
 		end,
 	},
 
-	-- Trouble for diagnostics
+	-- Trouble
 	{
 		"folke/trouble.nvim",
 		dependencies = {
@@ -519,32 +488,32 @@ return {
 			{
 				"<leader>tt",
 				"<cmd>Trouble diagnostics toggle <cr>",
-				desc = "Diagnostics (Trouble)",
+				desc = "Trouble: Toggle Trouble diagnostics",
 			},
 			{
 				"<leader>qf",
 				"<cmd>Trouble qflist toggle <cr>",
-				desc = "Quickfix List (Trouble)",
+				desc = "Trouble: Toggle quickfix list",
 			},
 			{
 				"<leader>ts",
 				"<cmd>Trouble symbols toggle win.position=bottom <cr>",
-				desc = "Symbols (Trouble)",
+				desc = "Trouble: Toggle symbols",
 			},
 			{
 				"<leader>td",
 				"<cmd>Trouble lsp toggle win.position=bottom <cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
+				desc = "Trouble: Toggle LSP",
 			},
 			{
 				"<leader>tl",
 				"<cmd>Trouble loclist toggle <cr>",
-				desc = "Location List (Trouble)",
+				desc = "Trouble: Toggle location list",
 			},
 			{
 				"<leader>tdo",
 				"<cmd>Trouble todo toggle <cr>",
-				desc = "Open todos in trouble",
+				desc = "Trouble: Toggle todo list",
 			},
 		},
 	},
@@ -558,14 +527,14 @@ return {
 				require("zen-mode").setup({
 					window = {
 						width = 1,
-                        height = 1,
+						height = 1,
 						options = {
-                            signcolumn = "no",  -- Hide signcolumn
-                            number = false,     -- Hide line numbers
-                            relativenumber = false, -- Hide relative line numbers
-                            cursorline = false, -- Disable the cursor line
-                            cursorcolumn = false, -- Disable the cursor column
-                        },
+							signcolumn = "no",
+							number = false,
+							relativenumber = false,
+							cursorline = false,
+							cursorcolumn = false,
+						},
 					},
 				})
 				require("zen-mode").toggle()
@@ -573,12 +542,12 @@ return {
 				vim.wo.number = true
 				vim.wo.rnu = true
 				cme("nord")
-			end)
+			end, { desc = "Zen-Mode: Toggle minimal zen mode" })
 
 			vim.keymap.set("n", "<leader>zs", function()
 				require("zen-mode").setup({
 					window = {
-						width = 80,
+						width = 150,
 						options = {},
 					},
 				})
@@ -588,20 +557,13 @@ return {
 				vim.wo.rnu = false
 				vim.opt.colorcolumn = "0"
 				cme("gotham")
-			end)
+			end, { desc = "Zen-Mode: Toggle wide zen mode" })
 		end,
 	},
 
+	-- Conform (formatting)
 	{
-		"stevearc/dressing.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
-
-	{
-		-- formatting plugin
 		"stevearc/conform.nvim",
-		-- load the LSP whenever we open a new buffer for a pre-existing file or for a new file
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local conform = require("conform")
@@ -622,26 +584,19 @@ return {
 					django = { "djlint" },
 					sql = { "sqlfmt" },
 				},
-				--	format_on_save = {
-				--		lsp_fallback = true,
-				--		async = false,
-				--		timeout_ms = 1000,
-				--	},
 			})
 
-			-- this is a keymap for formatting a file or a range of text
-			-- in normal mode this will format entire file
-			-- in visual mode this will format the highlighted text
 			vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 				conform.format({
 					lsp_fallback = true,
 					async = false,
 					timeout_ms = 1000,
 				})
-			end, { desc = "Format file (in normal mode) or range (in visual mode)" })
+			end, { desc = "Conform: Format file or selection" })
 		end,
 	},
 
+	-- Nvim-lint
 	{
 		"mfussenegger/nvim-lint",
 		event = { "BufReadPre", "BufNewFile" },
@@ -660,21 +615,17 @@ return {
 				git = { "gitlint" },
 			}
 
-			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-			-- linting will run on these events
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-				group = lint_augroup,
-				callback = function()
-					lint.try_lint()
-				end,
-			})
-
-			-- keymap to trigger linting manually
 			vim.keymap.set("n", "<leader>li", function()
 				lint.try_lint()
-			end, { desc = "Trigger linting for current file" })
+			end, { desc = "Nvim-Lint: Trigger linting for current file" })
 		end,
+	},
+
+	{
+		-- provides tons of options for improving Vim's built-in popup UI
+		"stevearc/dressing.nvim",
+		event = "VeryLazy",
+		opts = {},
 	},
 
 	-- AI Chat
@@ -756,67 +707,80 @@ return {
 			end
 
 			-- chat commands
-			vim.keymap.set("n", "<leader>aiv", "<cmd>GpChatToggle vsplit<cr>", keymapOptions("Toggle Chat Vsplit"))
-			vim.keymap.set("n", "<leader>aip", "<cmd>GpChatToggle popup<cr>", keymapOptions("Toggle Chat Popup"))
-			vim.keymap.set("n", "<leader>ait", "<cmd>GpChatToggle tabnew<cr>", keymapOptions("Toggle Chat NewTab"))
-
-			vim.keymap.set("v", "<leader>aiw", ":<C-u>'<,'>GpChatPaste<cr>", keymapOptions("Visual Chat Paste"))
+			vim.keymap.set("n", "<leader>aiv", "<cmd>GpChatToggle vsplit<cr>", { desc = "GP: Toggle chat in vsplit" })
+			vim.keymap.set("n", "<leader>aip", "<cmd>GpChatToggle popup<cr>", { desc = "GP: Toggle chat in popup" })
+			vim.keymap.set("n", "<leader>ait", "<cmd>GpChatToggle tabnew<cr>", { desc = "GP: Toggle chat in new tab" })
+			vim.keymap.set("v", "<leader>aiw", ":<C-u>'<,'>GpChatPaste<cr>", { desc = "GP: Paste selection into chat" })
 			vim.keymap.set(
 				"v",
 				"<leader>aiv",
 				":<C-u>'<,'>GpChatToggle vsplit<cr>",
-				keymapOptions("Visual Toggle Chat Vsplit")
+				{ desc = "GP: Toggle chat with selection in vsplit" }
 			)
 			vim.keymap.set(
 				"v",
 				"<leader>aip",
 				":<C-u>'<,'>GpChatToggle popup<cr>",
-				keymapOptions("Visual Toggle Chat Popup")
+				{ desc = "GP: Toggle chat with selection in popup" }
 			)
 			vim.keymap.set(
 				"v",
 				"<leader>ait",
 				":<C-u>'<,'>GpChatToggle tabnew<cr>",
-				keymapOptions("Visual Toggle Chat NewTab")
+				{ desc = "GP: Toggle chat with selection in new tab" }
 			)
-
-			--prompt commands
-			vim.keymap.set("n", "<C-g>j", "<cmd>GpContext<cr>", keymapOptions("Toggle Context"))
-			vim.keymap.set("v", "<C-g>j", ":<C-u>'<,'>GpContext<cr>", keymapOptions("Visual Toggle Context"))
+			vim.keymap.set("n", "<C-g>j", "<cmd>GpContext<cr>", { desc = "GP: Toggle context" })
+			vim.keymap.set("v", "<C-g>j", ":<C-u>'<,'>GpContext<cr>", { desc = "GP: Toggle context for selection" })
 		end,
 	},
-    {
-    "nvim-neorg/neorg",
-        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-        version = "*", -- Pin Neorg to the latest stable release
-        config = function()
-        require("neorg").setup {
-          load = {
-            ["core.defaults"] = {},
-            ["core.concealer"] = {},
-            ["core.dirman"] = {
-              config = {
-                workspaces = {
-                  notes = "~/notes",
-                },
-                default_workspace = "notes",
-              },
-            },
-          },
-        }
-  
-        vim.wo.foldlevel = 99
-        vim.wo.conceallevel = 2
-      end,
-    },
-    {
-        "dhruvasagar/vim-table-mode",
-                config = function()
-            -- Key mappings for vim-table-mode
-            -- Toggle TableMode on/off
-            vim.api.nvim_set_keymap("n", "<Leader>tm", ":TableModeToggle<CR>", { noremap = true, silent = true })
-                    -- Remap Tableize to <Leader>tts
-            vim.api.nvim_set_keymap("n", "<Leader>tts", ":Tableize<CR>", { noremap = true, silent = true })
-        end
-    },
+	{
+		-- note-taking plugin with markdown-like syntax
+		"nvim-neorg/neorg",
+		lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+		version = "*", -- Pin Neorg to the latest stable release
+		config = function()
+			require("neorg").setup({
+				load = {
+					["core.defaults"] = {},
+					["core.concealer"] = {},
+					["core.dirman"] = {
+						config = {
+							workspaces = {
+								notes = "~/notes",
+							},
+							default_workspace = "notes",
+						},
+					},
+				},
+			})
+
+            -- Set keymap for ':Neorg index'
+            vim.keymap.set('n', '<Leader>no', ':Neorg index<CR>', { noremap = true, silent = true })
+
+			vim.wo.foldlevel = 99
+			vim.wo.conceallevel = 2
+		end,
+	},
+	-- Vim Table Mode
+	-- make simple tables in nvim
+	{
+		"dhruvasagar/vim-table-mode",
+		config = function()
+            -- disable all native bindings, then set your own
+            vim.g.table_mode_disable_mappings = 1
+            vim.g.table_mode_disable_tableize_mappings = 1
+			vim.keymap.set(
+				"n",
+				"<Leader>tmt",
+				":TableModeToggle<CR>",
+				{ noremap = true, silent = true, desc = "Table-Mode: Toggle table mode" }
+			)
+			vim.keymap.set(
+				"n",
+				"<Leader>tmc",
+				":Tableize<CR>",
+				{ noremap = true, silent = true, desc = "Table-Mode: Convert to table" }
+			)
+		end,
+	},
 }

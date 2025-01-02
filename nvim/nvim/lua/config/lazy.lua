@@ -84,90 +84,86 @@ vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 -- global remaps
 
 --remap horizontal buffer split
-vim.keymap.set("n", "<leader>bh", "<cmd>split<CR>")
+vim.keymap.set("n", "<leader>bh", "<cmd>split<CR>", { desc = "Lazy Config: Split buffer horizontally" })
 
 -- remap vertical buffer split
-vim.keymap.set("n", "<leader>bv", "<cmd>vsplit<CR>")
+vim.keymap.set("n", "<leader>bv", "<cmd>vsplit<CR>", { desc = "Lazy Config: Split buffer vertically" })
 
 -- remap jump-to-end-of-line
-vim.keymap.set({ "n", "v" }, "<leader>nd", "$")
+vim.keymap.set({ "n", "v" }, "<leader>nd", "$", { desc = "Lazy Config: Jump to end of line" })
 
 --remap jump-to-start-of-line
-vim.keymap.set({ "n", "v" }, "<leader>st", "^")
+vim.keymap.set({ "n", "v" }, "<leader>st", "^", { desc = "Lazy Config: Jump to start of line" })
 
 -- remap redo key to "r"
-vim.keymap.set("n", "r", vim.cmd.redo, { noremap = true })
+vim.keymap.set("n", "r", vim.cmd.redo, { noremap = true, desc = "Lazy Config: Redo last action" })
 
 -- remap ctrl-w buffer switcher
-vim.keymap.set("n", "<leader>w", "<C-w>")
+vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Lazy Config: Window commands prefix" })
 
 -- remap tag return Ctrl-t for "go back from definition"
-vim.keymap.set("n", "gb", "<C-t>")
+vim.keymap.set("n", "gb", "<C-t>", { desc = "Lazy Config: Go back from definition" })
 
 -- remap vim's "Ex" Netrw explorer cmd in normal mode
-vim.keymap.set("n", "<leader>ee", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>ee", vim.cmd.Ex, { desc = "Lazy Config: Open Netrw file explorer" })
 
 -- remapping for Visual Block mode
-vim.keymap.set({ "n", "v" }, "<leader>vv", "<C-v>")
+vim.keymap.set({ "n", "v" }, "<leader>vv", "<C-v>", { desc = "Lazy Config: Enter Visual Block mode" })
 
 -- when highlighting in visual mode, you can move the entire highlighted
 -- sections with capital J, K, L, H
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-vim.keymap.set("x", "L", ">gv")
-vim.keymap.set("x", "H", "<gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Lazy Config: Move selected text down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Lazy Config: Move selected text up" })
+vim.keymap.set("x", "L", ">gv", { desc = "Lazy Config: Indent selection right" })
+vim.keymap.set("x", "H", "<gv", { desc = "Lazy Config: Indent selection left" })
 
 -- append the line below the curr line to the curr line with a space in btw
-vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Lazy Config: Join line below with current line" })
 
 --  ctrl-d and ctrl-u are for half-page jumping down/up respectively,
 --  but these next cmds make it so that the cursor stays in the middle of the
 --  page when you do these jumps
-vim.keymap.set("n", "<leader>ll", "<C-d>zz")
-vim.keymap.set("n", "<leader>hh", "<C-u>zz")
+vim.keymap.set("n", "<leader>ll", "<C-d>zz", { desc = "Lazy Config: Half-page jump down" })
+vim.keymap.set("n", "<leader>hh", "<C-u>zz", { desc = "Lazy Config: Half-page jump up" })
 
 -- these will keep the cursor in the middle of the page when jumping btw
 -- search terms
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "n", "nzzzv", { desc = "Lazy Config: Next search result centered" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Lazy Config: Previous search result centered" })
 
 -- this is for pasting the curr yanked item into some 2nd item to replace
 -- that 2nd item. This makes it so that the curr yanked item stays in that
 -- yanked buffer after you replace any item with it
 -- if you just use p for replace, that 2nd item would then be in the buffer
-vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Lazy Config: Paste without yanking replaced text" })
 
 -- y will yank only within Vim, but now leader-y will yank to system Clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-
--- this one deletes the selected text to the _ register (the black hole register)
--- vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Lazy Config: Yank to system clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Lazy Config: Yank line to system clipboard" })
 
 -- Visual mode mapping: Delete and copy to system clipboard
-vim.keymap.set("v", "<leader>dd", '"+d', { noremap = true, silent = true })
+vim.keymap.set("v", "<leader>dd", '"+d', { noremap = true, silent = true, desc = "Lazy Config: Delete and copy to system clipboard" })
 
 -- don't allow Q to be pressed with "no press"
-vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "Q", "<nop>", { desc = "Lazy Config: Disable Ex mode" })
 
 -- these next 4 are for quick-fix navigation in Vim
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Lazy Config: Next quickfix item" })
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Lazy Config: Previous quickfix item" })
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Lazy Config: Next location list item" })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Lazy Config: Previous location list item" })
 
 -- this will allow you to replace ALL instances of the word that the cursor
 -- was currently on when you pressed this cmd
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Lazy Config: Replace word under cursor" })
 
 -- turn the curr file into an executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Lazy Config: Make current file executable" })
 
 -- this is for :so %  which is "source curr NeoVim config file"
 vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("luafile $MYVIMRC")
-end)
-
+end, { desc = "Lazy Config: Source current Neovim config file" })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -179,6 +175,36 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Setup diagnostic toggle state and config
+local diagnostics_enabled = false
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        header = "",
+        prefix = "",
+    },
+})
+
+-- Toggle All Diagnostics keymap
+vim.keymap.set("n", "<leader>dt", function()
+    if diagnostics_enabled then
+        vim.diagnostic.config({ virtual_text = false })
+        print("Diagnostics text disabled")
+    else
+        vim.diagnostic.config({ virtual_text = true })
+        print("Diagnostics text enabled")
+    end
+    diagnostics_enabled = not diagnostics_enabled
+end, { desc = "Lazy Config: Toggle all diagnostic text" })
+
 
 -- Setup lazy.nvim
 require("lazy").setup({
