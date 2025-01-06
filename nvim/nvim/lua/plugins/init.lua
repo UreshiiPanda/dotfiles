@@ -769,6 +769,10 @@ return {
             -- disable all native bindings, then set your own
             vim.g.table_mode_disable_mappings = 1
             vim.g.table_mode_disable_tableize_mappings = 1
+
+            -- Explicitly unmap <leader>tt to avoid conflicts with Trouble
+            vim.keymap.del("n", "<leader>tt")
+
 			vim.keymap.set(
 				"n",
 				"<Leader>tmt",
