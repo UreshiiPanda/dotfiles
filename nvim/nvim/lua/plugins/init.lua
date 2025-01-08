@@ -474,50 +474,6 @@ return {
 		end,
 	},
 
-	-- Trouble
-	{
-		"folke/trouble.nvim",
-		dependencies = {
-			{ "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
-		},
-		opts = {
-			focus = true,
-		},
-		cmd = "Trouble",
-		keys = {
-			{
-				"<leader>tt",
-				"<cmd>Trouble diagnostics toggle <cr>",
-				desc = "Trouble: Toggle Trouble diagnostics",
-			},
-			{
-				"<leader>qf",
-				"<cmd>Trouble qflist toggle <cr>",
-				desc = "Trouble: Toggle quickfix list",
-			},
-			{
-				"<leader>ts",
-				"<cmd>Trouble symbols toggle win.position=bottom <cr>",
-				desc = "Trouble: Toggle symbols",
-			},
-			{
-				"<leader>td",
-				"<cmd>Trouble lsp toggle win.position=bottom <cr>",
-				desc = "Trouble: Toggle LSP",
-			},
-			{
-				"<leader>tl",
-				"<cmd>Trouble loclist toggle <cr>",
-				desc = "Trouble: Toggle location list",
-			},
-			{
-				"<leader>tdo",
-				"<cmd>Trouble todo toggle <cr>",
-				desc = "Trouble: Toggle todo list",
-			},
-		},
-	},
-
 	-- Zen mode
 	{
 		"folke/zen-mode.nvim",
@@ -772,6 +728,7 @@ return {
 
             -- Explicitly unmap <leader>tt to avoid conflicts with Trouble
             vim.keymap.del("n", "<leader>tt")
+            vim.keymap.del("n", "<leader>T")
 
 			vim.keymap.set(
 				"n",
@@ -786,5 +743,55 @@ return {
 				{ noremap = true, silent = true, desc = "Table-Mode: Convert to table" }
 			)
 		end,
+	},
+
+	-- Trouble
+	{
+		"folke/trouble.nvim",
+		dependencies = {
+			{ "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
+		},
+		opts = {
+			focus = true,
+		},
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>tt",
+				"<cmd>Trouble diagnostics toggle <cr>",
+				desc = "Trouble: Toggle Trouble diagnostics",
+			},
+            {
+				"<leader>T",
+				"<cmd>Trouble diagnostics toggle <cr>",
+				desc = "Trouble: Toggle Trouble diagnostics",
+			},
+
+			{
+				"<leader>qf",
+				"<cmd>Trouble qflist toggle <cr>",
+				desc = "Trouble: Toggle quickfix list",
+			},
+			{
+				"<leader>ts",
+				"<cmd>Trouble symbols toggle win.position=bottom <cr>",
+				desc = "Trouble: Toggle symbols",
+			},
+			{
+				"<leader>td",
+				"<cmd>Trouble lsp toggle win.position=bottom <cr>",
+				desc = "Trouble: Toggle LSP",
+			},
+			{
+				"<leader>tl",
+				"<cmd>Trouble loclist toggle <cr>",
+				desc = "Trouble: Toggle location list",
+			},
+			{
+				"<leader>tdo",
+				"<cmd>Trouble todo toggle <cr>",
+				desc = "Trouble: Toggle todo list",
+			},
+		},
 	},
 }

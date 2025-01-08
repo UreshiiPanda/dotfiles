@@ -74,6 +74,7 @@ set searchurls.acc https://acc.autodesk.com/home?referrer_url=https%3A%2F%2Facc.
 set searchurls.ol https://outlook.office.com/mail/
 set searchurls.az https://dev.azure.com/moregroup-inc/moregroup/_boards/board/t/moregroup%20Team/Backlog%20items
 set searchurls.kij https://read.amazon.co.jp/kindle-library
+set searchurls.gem https://gemini.google.com/app
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
