@@ -727,8 +727,8 @@ return {
             vim.g.table_mode_disable_tableize_mappings = 1
 
             -- Explicitly unmap <leader>tt to avoid conflicts with Trouble
-            vim.keymap.del("n", "<leader>tt")
-            vim.keymap.del("n", "<leader>T")
+            -- vim.keymap.del("n", "<leader>tt")
+            -- vim.keymap.del("n", "<leader>T")
 
 			vim.keymap.set(
 				"n",
