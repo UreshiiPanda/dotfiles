@@ -29,7 +29,7 @@ vim.opt.guicursor = ""
 
 -- lines numbers and relative line numbers
 vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 --  4-space indenting
 vim.opt.tabstop = 4
