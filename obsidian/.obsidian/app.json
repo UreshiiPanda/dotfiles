@@ -11,6 +11,5 @@
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "Images-Drawings",
   "autoPairMarkdown": false,
-  "tabSize": 6,
-  "showRibbon": false
+  "tabSize": 6
 }

@@ -12,5 +12,6 @@
     "custom"
   ],
   "showViewHeader": false,
-  "theme": "obsidian"
+  "theme": "obsidian",
+  "showRibbon": false
 }
