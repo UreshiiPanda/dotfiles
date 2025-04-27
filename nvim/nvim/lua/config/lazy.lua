@@ -31,6 +31,10 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = false
 
+-- case insensitive searching
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 --  4-space indenting
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
