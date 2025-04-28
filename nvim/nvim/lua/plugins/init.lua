@@ -799,190 +799,87 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		config = function()
-			-- Create ~/image_notes directory if it doesn't exist
-			local image_dir = vim.fn.expand("~/image_notes")
-			if vim.fn.isdirectory(image_dir) == 0 then
-				vim.fn.mkdir(image_dir, "p")
-			end
-
-			-- Configure the snacks.image module
-			require("snacks").setup({
-				-- Only enable the image plugin
-				image = {
-					enabled = true,
-					formats = {
-						"png",
-						"jpg",
-						"jpeg",
-						"gif",
-						"bmp",
-						"webp",
-						"tiff",
-						"heic",
-						"avif",
-						"mp4",
-						"mov",
-						"avi",
-						"mkv",
-						"webm",
-						"pdf",
-					},
-					-- Try displaying images even when terminal detection is inconsistent
-					force = true,
-					doc = {
-						-- enable image viewer for documents
-						enabled = true,
-						-- render images inline in the buffer on supported terminals
-						inline = true,
-						-- render the image in a floating window if inline is disabled
-						float = true,
-						max_width = 80,
-						max_height = 40,
-						-- Don't conceal the image text
-						conceal = false,
-					},
-					-- Include all standard image directories plus ~/image_notes
-					img_dirs = {
-						"img",
-						"images",
-						"assets",
-						"static",
-						"public",
-						"media",
-						"attachments",
-						vim.fn.expand("~/image_notes"),
-					},
-					-- Custom image resolver that checks multiple locations
-					resolve = function(file, src)
-						-- If src starts with '~', expand it
-						if string.sub(src, 1, 1) == "~" then
-							return vim.fn.expand(src)
-						end
-
-						-- Check if it's an absolute path
-						if vim.fn.fnamemodify(src, ":p") == src then
-							return src
-						end
-
-						-- Try in image_notes directory with basename
-						local in_image_notes = vim.fn.expand("~/image_notes/") .. vim.fn.fnamemodify(src, ":t")
-						if vim.fn.filereadable(in_image_notes) == 1 then
-							return in_image_notes
-						end
-
-						-- Try relative to the current file
-						local relative_to_file = vim.fn.fnamemodify(file, ":p:h") .. "/" .. src
-						if vim.fn.filereadable(relative_to_file) == 1 then
-							return relative_to_file
-						end
-
-						-- Try with standard directories
-						for _, dir in ipairs({ "img", "images", "assets", "static" }) do
-							local path = vim.fn.fnamemodify(file, ":p:h")
-								.. "/"
-								.. dir
-								.. "/"
-								.. vim.fn.fnamemodify(src, ":t")
-							if vim.fn.filereadable(path) == 1 then
-								return path
-							end
-						end
-
-						-- Default to just returning the source
-						return src
-					end,
-					-- Debug options to help troubleshoot
-					debug = {
-						request = true,
-						convert = true,
-						placement = true,
-					},
-					-- window options for image display
-					wo = {
-						wrap = false,
-						number = false,
-						relativenumber = false,
-						cursorcolumn = false,
-						signcolumn = "no",
-						foldcolumn = "0",
-						list = false,
-						spell = false,
-						statuscolumn = "",
-					},
+		opts = {
+			-- Position the image near the cursor
+			styles = {
+				snacks_image = {
+					relative = "cursor", -- Position relative to cursor
+					border = "rounded",
+					focusable = false,
+					backdrop = false,
+					row = 1,
+					col = 1,
 				},
+			},
+			-- Only enable the image plugin
+			image = {
+				enabled = true,
+				formats = {
+					"png",
+					"jpg",
+					"jpeg",
+					"gif",
+					"bmp",
+					"webp",
+					"tiff",
+					"heic",
+					"avif",
+					"mp4",
+					"mov",
+					"avi",
+					"mkv",
+					"webm",
+					"pdf",
+				},
+				force = true,
+				env = {
+					SNACKS_KITTY = true,
+				},
+				doc = {
+					enabled = true,
+					inline = false, -- Disable inline mode (don't show all images in buffer)
+					float = true, -- Enable floating window display
+					max_width = 60,
+					max_height = 30,
+				},
+				img_dirs = { vim.fn.expand("~/image_notes") },
+				debug = {
+					request = false,
+					convert = false,
+					placement = false,
+				},
+			},
 
-				-- Explicitly disable all other snacks plugins
-				animate = { enabled = false },
-				bigfile = { enabled = false },
-				bufdelete = { enabled = false },
-				dashboard = { enabled = false },
-				debug = { enabled = false },
-				dim = { enabled = false },
-				explorer = { enabled = false },
-				git = { enabled = false },
-				gitbrowse = { enabled = false },
-				indent = { enabled = false },
-				input = { enabled = false },
-				layout = { enabled = false },
-				lazygit = { enabled = false },
-				notifier = { enabled = false },
-				notify = { enabled = false },
-				picker = { enabled = false },
-				profiler = { enabled = false },
-				quickfile = { enabled = false },
-				rename = { enabled = false },
-				scope = { enabled = false },
-				scratch = { enabled = false },
-				scroll = { enabled = false },
-				statuscolumn = { enabled = false },
-				terminal = { enabled = false },
-				toggle = { enabled = false },
-				util = { enabled = false },
-				win = { enabled = false },
-				words = { enabled = false },
-				zen = { enabled = false },
-			})
-		end,
-		keys = {
-			{
-				"<leader>ih",
-				function()
-					-- Force the image to display by explicitly calling the hover function
-					local image = require("snacks").image
-					if image then
-						image.hover()
-					end
-				end,
-				desc = "Show image at cursor",
-			},
-			{
-				"<leader>ic",
-				function()
-					local image = require("snacks").image
-					if image then
-						image.clear()
-					end
-				end,
-				desc = "Clear images",
-			},
-			{
-				"<leader>id",
-				function()
-					-- Debug command to print information about the current environment
-					local snacks = require("snacks")
-					if snacks and snacks.image then
-						vim.notify("Snacks image environment info:")
-						vim.notify("Terminal: " .. vim.inspect(snacks.image.terminal.env))
-						vim.notify("Current file: " .. vim.fn.expand("%:p"))
-						-- Force reload images in the current buffer
-						if snacks.image.doc then
-							snacks.image.doc.update()
-						end
-					end
-				end,
-				desc = "Debug image display",
-			},
+			-- Disable all other snacks plugins
+			animate = { enabled = false },
+			bigfile = { enabled = false },
+			bufdelete = { enabled = false },
+			dashboard = { enabled = false },
+			debug = { enabled = false },
+			dim = { enabled = false },
+			explorer = { enabled = false },
+			git = { enabled = false },
+			gitbrowse = { enabled = false },
+			indent = { enabled = false },
+			input = { enabled = false },
+			layout = { enabled = false },
+			lazygit = { enabled = false },
+			notifier = { enabled = false },
+			notify = { enabled = false },
+			picker = { enabled = false },
+			profiler = { enabled = false },
+			quickfile = { enabled = false },
+			rename = { enabled = false },
+			scope = { enabled = false },
+			scratch = { enabled = false },
+			scroll = { enabled = false },
+			statuscolumn = { enabled = false },
+			terminal = { enabled = false },
+			toggle = { enabled = false },
+			util = { enabled = false },
+			win = { enabled = false },
+			words = { enabled = false },
+			zen = { enabled = false },
 		},
 	},
 	-- Image paste functionality with img-clip.nvim
@@ -996,8 +893,8 @@ return {
 				dir_path = vim.fn.expand("~/image_notes"),
 				-- Use relative path from current file but check multiple locations
 				relative_to_current_file = false,
-				-- Use absolute path to better support all environments
-				use_absolute_path = true,
+				-- Change this to false to use ~ paths instead of absolute paths
+				use_absolute_path = false,
 				-- Format for the image filename (timestamp-based by default)
 				file_name = function()
 					return "image_" .. os.date("%Y%m%d%H%M%S")
@@ -1006,6 +903,12 @@ return {
 				extension = "png",
 				-- Template for insertion (supports $FILE_PATH, $CURSOR placeholders)
 				template = "![$CURSOR]($FILE_PATH)",
+				-- Path transformer to convert absolute paths to tilde paths
+				path_transformer = function(path)
+					-- Replace the home directory with ~ in the path
+					local home = vim.fn.expand("$HOME")
+					return path:gsub("^" .. home, "~")
+				end,
 				-- Automatically enter insert mode after pasting
 				insert_mode_after_paste = true,
 				-- Don't prompt for filename
@@ -1017,7 +920,6 @@ return {
 				-- Download images from URLs
 				download_images = true,
 			},
-
 			-- Filetype-specific options
 			filetypes = {
 				markdown = {
@@ -1030,12 +932,11 @@ return {
 				-- Neorg specific configuration
 				norg = {
 					-- Neorg uses a specific syntax for images
-					template = "{image: $FILE_PATH}\n$CURSOR",
+					template = ".image $FILE_PATH\n$CURSOR",
 					-- Don't URL encode paths for Neorg
 					url_encode_path = false,
 				},
 			},
-
 			-- Enable drag-and-drop support
 			drag_and_drop = {
 				enabled = true,
@@ -1054,7 +955,22 @@ return {
 				vim.fn.mkdir(image_dir, "p")
 			end
 
-			require("img-clip").setup(opts)
+			-- Hook into the plugin's path handling to convert absolute paths to tilde paths
+			local img_clip = require("img-clip")
+			local original_paste = img_clip.paste
+
+			-- Override the paste function to transform paths
+			img_clip.paste = function(...)
+				local result = original_paste(...)
+
+				-- If path transformation was successful, return the result
+				if result then
+					-- The path is already transformed by the path_transformer in the options
+					return result
+				end
+			end
+
+			img_clip.setup(opts)
 		end,
 	},
 }
