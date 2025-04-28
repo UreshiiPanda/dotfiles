@@ -21,8 +21,14 @@ else
     sleep 0.5
 fi
 
+
 # Create a new tab with Command+T
 osascript -e 'tell application "System Events" to keystroke "t" using command down'
+sleep 0.5
+
+# Send the kitten command to rename the tab via keystrokes
+osascript -e 'tell application "System Events" to keystroke "kitten @ set-tab-title notes"'
+osascript -e 'tell application "System Events" to keystroke return'
 sleep 0.5
 
 # Change to notes directory
