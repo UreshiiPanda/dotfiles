@@ -887,90 +887,66 @@ return {
 		"HakonHarnes/img-clip.nvim",
 		event = "VeryLazy",
 		opts = {
-			-- Default configuration for all filetypes
 			default = {
 				-- Save images to ~/image_notes directory
 				dir_path = vim.fn.expand("~/image_notes"),
-				-- Use relative path from current file but check multiple locations
+				-- These settings don't seem to be working as expected
 				relative_to_current_file = false,
-				-- Change this to false to use ~ paths instead of absolute paths
 				use_absolute_path = false,
-				-- Format for the image filename (timestamp-based by default)
 				file_name = function()
 					return "image_" .. os.date("%Y%m%d%H%M%S")
 				end,
-				-- File extension
 				extension = "png",
-				-- Template for insertion (supports $FILE_PATH, $CURSOR placeholders)
-				template = "![$CURSOR]($FILE_PATH)",
-				-- Path transformer to convert absolute paths to tilde paths
-				path_transformer = function(path)
-					-- Replace the home directory with ~ in the path
-					local home = vim.fn.expand("$HOME")
-					return path:gsub("^" .. home, "~")
+				-- The key fix: override the template to directly use the tilde path
+				template = function(context)
+					-- Get just the filename portion
+					local filename = vim.fn.fnamemodify(context.file_path, ":t")
+					-- Return the template with a hardcoded tilde path
+					return ".image ~/image_notes/" .. filename .. "\n$CURSOR"
 				end,
-				-- Automatically enter insert mode after pasting
 				insert_mode_after_paste = true,
-				-- Don't prompt for filename
 				prompt_for_file_name = false,
-				-- Additional image processing (e.g., compression)
-				process_cmd = "", -- For image processing, e.g.: "convert - -resize 50% -"
-				-- Copy images when referenced from other paths
 				copy_images = true,
-				-- Download images from URLs
 				download_images = true,
 			},
-			-- Filetype-specific options
+			-- Filetype-specific options (note we're overriding the norg template)
 			filetypes = {
 				markdown = {
-					template = "![$CURSOR]($FILE_PATH)",
+					template = function(context)
+						local filename = vim.fn.fnamemodify(context.file_path, ":t")
+						return "![Image](~/image_notes/" .. filename .. ")"
+					end,
 					url_encode_path = false,
 				},
 				html = {
-					template = '<img src="$FILE_PATH" alt="$CURSOR">',
+					template = function(context)
+						local filename = vim.fn.fnamemodify(context.file_path, ":t")
+						return '<img src="~/image_notes/' .. filename .. '" alt="Image">'
+					end,
 				},
-				-- Neorg specific configuration
 				norg = {
-					-- Neorg uses a specific syntax for images
-					template = ".image $FILE_PATH\n$CURSOR",
-					-- Don't URL encode paths for Neorg
+					template = function(context)
+						local filename = vim.fn.fnamemodify(context.file_path, ":t")
+						return ".image ~/image_notes/" .. filename .. "\n$CURSOR"
+					end,
 					url_encode_path = false,
 				},
 			},
-			-- Enable drag-and-drop support
 			drag_and_drop = {
 				enabled = true,
-				insert_mode = false, -- Whether to enable in insert mode
+				insert_mode = false,
 			},
 		},
 		keys = {
-			-- Suggested keymap
 			{ "<leader>ip", "<cmd>PasteImage<cr>", desc = "Paste image from clipboard" },
 		},
-		-- Make sure the image_notes directory exists
 		config = function(_, opts)
-			-- Create the image_notes directory if it doesn't exist
 			local image_dir = vim.fn.expand("~/image_notes")
 			if vim.fn.isdirectory(image_dir) == 0 then
 				vim.fn.mkdir(image_dir, "p")
 			end
 
-			-- Hook into the plugin's path handling to convert absolute paths to tilde paths
-			local img_clip = require("img-clip")
-			local original_paste = img_clip.paste
-
-			-- Override the paste function to transform paths
-			img_clip.paste = function(...)
-				local result = original_paste(...)
-
-				-- If path transformation was successful, return the result
-				if result then
-					-- The path is already transformed by the path_transformer in the options
-					return result
-				end
-			end
-
-			img_clip.setup(opts)
+			require("img-clip").setup(opts)
 		end,
 	},
 }
