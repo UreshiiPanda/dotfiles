@@ -48,33 +48,22 @@ set searchurls.cb https://console.cloud.google.com/cloud-build/builds?referrer=s
 set searchurls.pr https://kp-run-pdjzxrqjaq-uc.a.run.app/
 set searchurls.gd https://docs.google.com/document/u/0/
 set searchurls.da https://www.deviantart.com/search?q=
-set searchurls.maz https://mail.google.com/mail/u/1/#inbox
-set searchurls.sz https://app.slack.com/client/T76PB42NB/C071VQP34J1
 set searchurls.ex https://excalidraw.com/
-set searchurls.lz http://localhost:4200/
-set searchurls.cz https://calendar.google.com/calendar/u/1/r
-set searchurls.fb https://my.freshbooks.com/#/time-tracking/review
 set searchurls.it https://www.italki.com/dashboard
-set searchurls.al https://alight.service-now.com/sp?id=ec_dashboard
-set searchurls.bee https://prod.beeline.com/alight/welcome/
-set searchurls.sa https://app.slack.com/client/T0CF520R1/C065FCG9133
-set searchurls.nz https://www.notion.so/zealitconsultants/d17af203dcfc4cc48600d9bc91f623e4
-set searchurls.gia https://github.com/CompassPHS
-set searchurls.ja https://healthnav.atlassian.net/jira/software/c/projects/NSE/boards/1287
-set searchurls.pa https://cicd.compassphs.com/go/pipelines
 set searchurls.mt https://monkeytype.com
 set searchurls.adp https://online.adp.com/signin/v1/?APPID=Pin4NAS&productId=80e309c3-709e-bae1-e053-3505430b5495&returnURL=https://login.adp.com&callingAppId=landing&TARGET=-SM-https://login.adp.com/ee/getProducts?event=Next&userSelected=anActiveEmployee&transId=899-P21-5BKYZF
 set searchurls.ad https://dev.azure.com/moregroup-inc/moregroup
 set searchurls.mam https://outlook.office365.com/mail/
 set searchurls.cu https://app.clickup.com/14105674/home
-set searchurls.ccf https://acc.autodesk.com/docs/files/projects/92acb028-512c-479c-be38-7d7e6fae0612?folderUrn=urn%3Aadsk.wipprod%3Afs.folder%3Aco.4RSdP7D5QJWpnd2ZVB5Npg&viewModel=detail&moduleId=folders
 set searchurls.mai localhost:3000
 set searchurls.sap https://us2.concursolutions.com/nui/expense
 set searchurls.acc https://acc.autodesk.com/home?referrer_url=https%3A%2F%2Facc.autodesk.com%2Finsight%2Faccounts%2Ff7da234a-5f7b-4adc-85b5-3836bf17916a%2Fdata%2Fpowerbi-template-gallery
 set searchurls.ol https://outlook.office.com/mail/
-set searchurls.az https://dev.azure.com/moregroup-inc/moregroup/_boards/board/t/moregroup%20Team/Backlog%20items
 set searchurls.kij https://read.amazon.co.jp/kindle-library
 set searchurls.gem https://gemini.google.com/app
+set searchurls.map https://www.google.com/maps
+set searchurls.jn https://japanese.todaiinews.com/?hl=en-US
+set searchurls.mu https://www.meetup.com/home
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
@@ -90,7 +79,7 @@ bind o fillcmdline open
 bind O current_url open
 bind w fillcmdline winopen
 bind W current_url winopen
-bind t tabnext_gt
+unbind t
 bind ]] followpage next
 bind [[ followpage prev
 bind [c urlincrement -1
@@ -136,7 +125,7 @@ bind << tabmove -1
 bind >> tabmove +1
 bind u undo
 bind U undo window
-bind r tabprev
+unbind r
 bind R reloadhard
 bind x stop
 bind gi focusinput -l
@@ -371,6 +360,8 @@ autocmd DocStart www.lintcode.com mode ignore
 autocmd DocStart https://app.codesignal.com mode ignore
 autocmd DocStart http://localhost:8888/lab* mode ignore
 autocmd DocStart localhost:3000 mode ignore
+autocmd DocStart localhost:8080 mode ignore
+autocmd DocStart https://app-planner-001.azurewebsites.net mode ignore
 autocmd DocLoad ^https://github.com/tridactyl/tridactyl/issues/new$ issue
 autocmd TriStart .* source_quiet
 
