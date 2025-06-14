@@ -67,6 +67,7 @@ set searchurls.mu https://www.meetup.com/home
 set searchurls.pl https://planner.cloud.microsoft/webui/mytasks/assignedtome/view/grid?tid=269f238f-b0fb-4ee1-be86-054b9b3fc1ec
 set searchurls.ap https://portal.azure.com/#home
 set searchurls.do https://dev.azure.com/moregroup-inc/moregroup/_boards/board/t/moregroup%20Team/Features
+set searchurls.esp https://www.google.com/search?client=firefox-b-1-d&q=spanish+to+english
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
