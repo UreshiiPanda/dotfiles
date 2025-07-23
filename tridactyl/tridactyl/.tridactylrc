@@ -1,5 +1,5 @@
 " General Settings
-set update.lastchecktime 1725323545082
+set update.lastchecktime 1753303126320
 set update.nag true
 set update.nagwait 7
 set update.lastnaggedversion 1.24.1
@@ -50,7 +50,7 @@ set searchurls.gd https://docs.google.com/document/u/0/
 set searchurls.da https://www.deviantart.com/search?q=
 set searchurls.ex https://excalidraw.com/
 set searchurls.it https://www.italki.com/dashboard
-set searchurls.mt https://monkeytype.com
+set searchurls.mt https://teams.microsoft.com/v2/
 set searchurls.adp https://online.adp.com/signin/v1/?APPID=Pin4NAS&productId=80e309c3-709e-bae1-e053-3505430b5495&returnURL=https://login.adp.com&callingAppId=landing&TARGET=-SM-https://login.adp.com/ee/getProducts?event=Next&userSelected=anActiveEmployee&transId=899-P21-5BKYZF
 set searchurls.ad https://dev.azure.com/moregroup-inc/moregroup
 set searchurls.mam https://outlook.office365.com/mail/
@@ -121,8 +121,8 @@ bind H back
 bind L forward
 bind <C-o> jumpprev
 bind <C-i> jumpnext
-bind d tabclose
-bind D composite tabprev; tabclose #
+unbind d
+bind D tabclose
 bind gx0 tabclosealltoleft
 bind gx$ tabclosealltoright
 bind << tabmove -1
@@ -250,6 +250,7 @@ unbind <S-Space>
 unbind <ACSD-D>
 bind <ACM-D> mode ignore
 bind 'C tab https://claude.ai/
+unbind q
 bind --mode=browser <C-.> sidebartoggle
 bind --mode=browser <C-,> escapehatch
 bind --mode=browser <C-6> tab #
