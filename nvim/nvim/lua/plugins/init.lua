@@ -690,6 +690,7 @@ return {
 		end,
 	},
 	{
+		-- neorg/ norg
 		-- note-taking plugin with markdown-like syntax
 		"nvim-neorg/neorg",
 		lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
@@ -705,6 +706,11 @@ return {
 								notes = "~/notes",
 							},
 							default_workspace = "notes",
+						},
+					},
+					["core.esupports.indent"] = {
+						config = {
+							dedent_excess = false,
 						},
 					},
 				},
