@@ -396,6 +396,11 @@ return {
 				},
 			})
 
+            -- Setup sourcekit-lsp for Swift (not managed by Mason)
+			require("lspconfig").sourcekit.setup({
+				capabilities = lsp_capabilities,
+			})
+
 			-- incorporate cmp for code completion
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }

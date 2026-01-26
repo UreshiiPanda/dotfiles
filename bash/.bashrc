@@ -83,3 +83,4 @@ source <(ng completion script)
 # Add cargo environment
 . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="/opt/homebrew/bin:$PATH"
