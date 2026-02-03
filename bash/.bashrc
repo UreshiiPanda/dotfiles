@@ -34,9 +34,8 @@ eval "$(fzf --bash)"
 
 # Enhanced FZF default options with preview
 export FZF_DEFAULT_OPTS="
-  --bind 'tab:down'
-  --bind 'btab:up'
-  --bind 'ctrl-a:toggle'
+  --bind 'tab:toggle'
+  --bind 'btab:toggle'
   --layout reverse
   --border rounded
   --height 80%
