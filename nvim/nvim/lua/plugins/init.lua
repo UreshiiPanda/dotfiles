@@ -502,6 +502,7 @@ return {
 		end,
 	},
 
+	-- Dressing
 	{
 		-- provides tons of options for improving Vim's built-in popup UI
 		"stevearc/dressing.nvim",
@@ -509,9 +510,9 @@ return {
 		opts = {},
 	},
 
+	-- Neorg/ norg
+	-- note-taking plugin with markdown-like syntax
 	{
-		-- neorg/ norg
-		-- note-taking plugin with markdown-like syntax
 		"nvim-neorg/neorg",
 		lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
 		version = "*", -- Pin Neorg to the latest stable release
