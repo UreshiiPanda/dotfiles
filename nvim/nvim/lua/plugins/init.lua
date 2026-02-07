@@ -9,23 +9,22 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-tree/nvim-web-devicons" },
 			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+			},
+			{
 				"folke/todo-comments.nvim",
 				event = { "BufReadPre", "BufNewFile" },
 				dependencies = { "nvim-lua/plenary.nvim" },
 				config = function()
 					local todo_comments = require("todo-comments")
-
-					-- set keymaps
 					local keymap = vim.keymap
-
 					keymap.set("n", "]t", function()
 						todo_comments.jump_next()
 					end, { desc = "Todo-Comments: Jump to next todo comment" })
-
 					keymap.set("n", "[t", function()
 						todo_comments.jump_prev()
 					end, { desc = "Todo-Comments: Jump to previous todo comment" })
-
 					todo_comments.setup()
 				end,
 			},
@@ -34,16 +33,13 @@ return {
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local transform_mod = require("telescope.actions.mt").transform_mod
-
 			local trouble = require("trouble")
 			local trouble_telescope = require("trouble.sources.telescope")
-
 			local custom_actions = transform_mod({
 				open_trouble_qflist = function(prompt_bufnr)
 					trouble.toggle("quickfix")
 				end,
 			})
-
 			telescope.setup({
 				defaults = {
 					path_display = { "smart" },
@@ -60,18 +56,47 @@ return {
 						height = 0.85,
 					},
 					winblend = 0,
+					-- Performance optimizations
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"--hidden",
+						"--glob=!.git/",
+						"--glob=!node_modules/",
+					},
+					file_ignore_patterns = { ".git/", "node_modules/", ".DS_Store" },
+					-- Speed improvements
+					sorting_strategy = "descending",
+					cache_picker = {
+						num_pickers = 10,
+					},
+				},
+				pickers = {
+					find_files = {
+						find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*", "--glob", "!node_modules/*" },
+					},
+					live_grep = {
+						additional_args = function()
+							return { "--hidden", "--glob", "!.git/*", "--glob", "!node_modules/*" }
+						end,
+					},
 				},
 			})
+			-- Load fzf extension for massive performance boost
+			telescope.load_extension("fzf")
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>f", function()
 				builtin.find_files({
 					no_ignore = true,
 					hidden = true,
-					file_ignore_patterns = { ".git/", "node_modules/", ".DS_Store" },
 				})
 			end, { desc = "Telescope: Find files (including hidden)" })
-
 			vim.keymap.set("n", "<leader>gi", builtin.git_files, { desc = "Telescope: Search git files" })
 			vim.keymap.set(
 				"n",
@@ -121,44 +146,19 @@ return {
 		end,
 	},
 
-	-- Harpoon
-	{
-		"ThePrimeagen/harpoon",
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-		},
-		config = function()
-			local mark = require("harpoon.mark")
-			local ui = require("harpoon.ui")
-
-			vim.keymap.set("n", "<leader>af", mark.add_file, { desc = "Harpoon: Add file to marks" })
-			vim.keymap.set("n", "<leader>qm", ui.toggle_quick_menu, { desc = "Harpoon: Toggle quick menu" })
-
-			vim.keymap.set("n", "<leader>1", function()
-				ui.nav_file(1)
-			end, { desc = "Harpoon: Navigate to file 1" })
-			vim.keymap.set("n", "<leader>2", function()
-				ui.nav_file(2)
-			end, { desc = "Harpoon: Navigate to file 2" })
-			vim.keymap.set("n", "<leader>3", function()
-				ui.nav_file(3)
-			end, { desc = "Harpoon: Navigate to file 3" })
-			vim.keymap.set("n", "<leader>4", function()
-				ui.nav_file(4)
-			end, { desc = "Harpoon: Navigate to file 4" })
-		end,
-	},
-
 	-- UndoTree
 	{
 		"mbbill/undotree",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy", -- Pre-load instead of waiting for command
+		keys = {
+			{ "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "UndoTree: Toggle undo tree" },
+			{ "<leader>uf", "<cmd>UndotreeFocus<CR>", desc = "UndoTree: Focus undo tree" },
+		},
 		config = function()
-			vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "UndoTree: Toggle undo tree" })
-			vim.keymap.set("n", "<leader>uf", "<cmd>UndotreeFocus<CR>", { desc = "UndoTree: Focus undo tree" })
-
 			vim.g.undotree_WindowLayout = 2
 			vim.g.undotree_SetFocusWhenToggle = 1
+			vim.g.undotree_ShortIndicators = 1 -- Faster rendering
+			vim.g.undotree_DiffAutoOpen = 0
 		end,
 	},
 
@@ -226,16 +226,12 @@ return {
 
 	-- LSP
 	{
-		-- a plugin for LSP functionality
 		"neovim/nvim-lspconfig",
-		-- load the LSP whenever we open a new buffer for a pre-existing file or for a new file
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			-- Mason is a package manager for all things LSP
 			{ "williamboman/mason.nvim", event = { "BufReadPre", "BufNewFile" } },
 			{ "williamboman/mason-lspconfig.nvim", event = { "BufReadPre", "BufNewFile" } },
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim", event = { "BufReadPre", "BufNewFile" } },
-			-- completion plugin not just for the curr file but also for all of Neovim
 			{ "hrsh7th/cmp-nvim-lsp", event = { "BufReadPre", "BufNewFile" } },
 			{ "hrsh7th/cmp-buffer", event = { "BufReadPre", "BufNewFile" } },
 			{ "hrsh7th/cmp-path", event = { "BufReadPre", "BufNewFile" } },
@@ -244,36 +240,23 @@ return {
 				"hrsh7th/nvim-cmp",
 				event = "InsertEnter",
 			},
-			-- snippet engine for defining/saving code snippets on the fly in a shortcut and having them show up in completion suggestions
 			{
 				"L3MON4D3/LuaSnip",
-				-- follow latest release of LuaSnip
 				version = "v2.*",
 				build = "make install_jsregexp",
 			},
 			{ "saadparwaiz1/cmp_luasnip", event = { "BufReadPre", "BufNewFile" } },
-			-- this is a useful snippet library
 			{ "rafamadriz/friendly-snippets", event = { "BufReadPre", "BufNewFile" } },
-			-- this is for nice pictograms
 			{ "onsails/lspkind.nvim", event = { "BufReadPre", "BufNewFile" } },
-			-- this is for showing Neovim and LSP notifications
 			{ "j-hui/fidget.nvim", event = { "BufReadPre", "BufNewFile" } },
 		},
 		config = function()
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-				border = "rounded",
-			})
+			-- Configure LSP window borders (modern API)
+			require("lspconfig.ui.windows").default_options.border = "rounded"
 
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-				border = "rounded",
-			})
-
-			-- LspAttach will perform these only after a given LSP attaches to the buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
 				callback = function(event)
-					local opts = { buffer = event.buf }
-
 					vim.keymap.set("n", "gd", function()
 						vim.lsp.buf.definition()
 					end, { buffer = event.buf, desc = "LSP: Go to definition" })
@@ -287,11 +270,11 @@ return {
 						vim.diagnostic.open_float()
 					end, { buffer = event.buf, desc = "LSP: Show diagnostics in float" })
 					vim.keymap.set("n", "[d", function()
-						vim.diagnostic.goto_next()
-					end, { buffer = event.buf, desc = "LSP: Go to next diagnostic" })
-					vim.keymap.set("n", "]d", function()
-						vim.diagnostic.goto_prev()
+						vim.diagnostic.jump({ count = -1, float = true })
 					end, { buffer = event.buf, desc = "LSP: Go to previous diagnostic" })
+					vim.keymap.set("n", "]d", function()
+						vim.diagnostic.jump({ count = 1, float = true })
+					end, { buffer = event.buf, desc = "LSP: Go to next diagnostic" })
 					vim.keymap.set("n", "<leader>ca", function()
 						vim.lsp.buf.code_action()
 					end, { buffer = event.buf, desc = "LSP: Show code actions" })
@@ -307,13 +290,9 @@ return {
 				end,
 			})
 
-			-- this enables auto-completion for each lang server (see below)
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- incorporate Fidget for LSP progress msgs
 			require("fidget").setup({})
-			-- incorporate Mason for LSP management
-			-- see lang servers by typing in:    :Mason
 			require("mason").setup({
 				ui = {
 					border = "rounded",
@@ -361,14 +340,12 @@ return {
 				}),
 				automatic_installation = true,
 				handlers = {
-					-- set up all of our LSP servers
 					function(server_name)
 						require("lspconfig")[server_name].setup({
 							capabilities = lsp_capabilities,
 						})
 					end,
 
-					-- Lua needs a special setup
 					lua_ls = function()
 						require("lspconfig").lua_ls.setup({
 							capabilities = lsp_capabilities,
@@ -377,46 +354,40 @@ return {
 									runtime = {
 										version = "LuaJIT",
 									},
-									-- we have to set this so that the incoming lang server can recog the "vim" global var
 									diagnostics = {
 										globals = { "vim" },
 									},
 									workspace = {
-										-- here we make the lang server aware of any runtime files
 										library = {
 											vim.env.VIMRUNTIME,
 											vim.fn.expand("$VIMRUNTIME/lua"),
 											vim.fn.stdpath("config") .. "/lua",
 										},
+										checkThirdParty = false,
 									},
 								},
 							},
 						})
 					end,
+
+					sourcekit = function()
+						require("lspconfig").sourcekit.setup({
+							capabilities = lsp_capabilities,
+						})
+					end,
 				},
 			})
 
-            -- Setup sourcekit-lsp for Swift (not managed by Mason)
-			require("lspconfig").sourcekit.setup({
-				capabilities = lsp_capabilities,
-			})
-
-			-- incorporate cmp for code completion
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-			-- this is the function that loads any extra snippets via luasnip
-			-- eg: extra VS-Code style snippets from rafamadriz/friendly-snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
-
 				completion = {
 					completeopt = "menu,menuone,preview,noselect",
 				},
 
-				-- tell cmp which sources to get completion info from
-				-- the order of these is the order that they will appear in the pop-up menu
 				sources = {
 					{ name = "path" },
 					{ name = "nvim_lsp" },
@@ -424,8 +395,6 @@ return {
 					{ name = "buffer", keyword_length = 3 },
 				},
 
-				-- these are for the dropdown menu that appears for code completion suggestions
-				-- the cmp.mapping.complete shows the entire list of possibilities
 				mapping = cmp.mapping.preset.insert({
 					["<D-k>"] = cmp.mapping.select_prev_item(cmp_select),
 					["<D-j>"] = cmp.mapping.select_next_item(cmp_select),
@@ -435,14 +404,12 @@ return {
 					["<D-f>"] = cmp.mapping.complete(),
 				}),
 
-				-- configure how nvim-cmp interacts with snippet engine
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
 
-				-- configure LspKind for vs-code like pictograms in completion menu
 				formatting = {
 					format = require("lspkind").cmp_format({
 						maxwidth = 50,
@@ -450,7 +417,6 @@ return {
 					}),
 				},
 
-				-- add window borders to cmp and cmp previews
 				window = {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
@@ -459,66 +425,20 @@ return {
 		end,
 	},
 
-	-- for useless animations
 	-- Cellular Automaton
 	{
 		"eandrju/cellular-automaton.nvim",
-		config = function()
-			vim.keymap.set(
-				"n",
+		cmd = { "CellularAutomaton" },
+		keys = {
+			{
 				"<leader>mr",
 				"<cmd>CellularAutomaton make_it_rain<CR>",
-				{ desc = "Cellular-Automaton: Make it rain effect" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>gl",
-				"<cmd>CellularAutomaton game_of_life<CR>",
-				{ desc = "Cellular-Automaton: Game of Life" }
-			)
-		end,
-	},
-
-	-- Zen mode
-	{
-		"folke/zen-mode.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+				desc = "Cellular-Automaton: Make it rain effect",
+			},
+			{ "<leader>gl", "<cmd>CellularAutomaton game_of_life<CR>", desc = "Cellular-Automaton: Game of Life" },
+		},
 		config = function()
-			vim.keymap.set("n", "<leader>zz", function()
-				require("zen-mode").setup({
-					window = {
-						width = 1,
-						height = 1,
-						options = {
-							signcolumn = "no",
-							number = false,
-							relativenumber = false,
-							cursorline = false,
-							cursorcolumn = false,
-						},
-					},
-				})
-				require("zen-mode").toggle()
-				vim.wo.wrap = false
-				vim.wo.number = true
-				vim.wo.rnu = true
-				cme("nord")
-			end, { desc = "Zen-Mode: Toggle minimal zen mode" })
-
-			vim.keymap.set("n", "<leader>zs", function()
-				require("zen-mode").setup({
-					window = {
-						width = 150,
-						options = {},
-					},
-				})
-				require("zen-mode").toggle()
-				vim.wo.wrap = false
-				vim.wo.number = false
-				vim.wo.rnu = false
-				vim.opt.colorcolumn = "0"
-				cme("gotham")
-			end, { desc = "Zen-Mode: Toggle wide zen mode" })
+			-- Config removed - keymaps now in keys table above for lazy loading
 		end,
 	},
 
@@ -589,111 +509,6 @@ return {
 		opts = {},
 	},
 
-	-- AI Chat
-	{
-		"robitx/gp.nvim",
-		config = function()
-			local conf = {
-				providers = {
-					anthropic = {
-						endpoint = "https://api.anthropic.com/v1/messages",
-						secret = os.getenv("ANTHROPIC_API_KEY"),
-					},
-					ollama = {
-						endpoint = "http://localhost:11434/v1/chat/completions",
-						disable = true,
-						secret = "put_secret_here",
-					},
-				},
-				-- if you want to set a custom agent, set diable to false
-				agents = {
-					{
-						provider = "anthropic",
-						name = "ChatClaude-3-5-Sonnet",
-						disable = true,
-						chat = true,
-						command = false,
-						-- string with model name or table with model name and parameters
-						model = { model = "claude-3-5-sonnet-20240620", temperature = 0.8, top_p = 1 },
-						-- system prompt (use this to specify the persona/role of the AI)
-						system_prompt = require("gp.defaults").chat_system_prompt,
-						--system_prompt = "You are a general AI assistant.",
-					},
-					{
-						provider = "ollama",
-						name = "ChatOllamaLlama3.1-8B",
-						disable = true,
-						chat = true,
-						command = false,
-						-- string with model name or table with model name and parameters
-						model = {
-							model = "llama3.1",
-							temperature = 0.6,
-							top_p = 1,
-							min_p = 0.05,
-						},
-						-- system prompt (use this to specify the persona/role of the AI)
-						system_prompt = "You are a general AI assistant.",
-					},
-				},
-				-- chat_user_prefix = "💬:",
-
-				-- chat assistant prompt prefix (static string or a table {static, template})
-				-- first string has to be static, second string can contain template {{agent}}
-				-- just a static string is legacy and the [{{agent}}] element is added automatically
-				-- if you really want just a static string, make it a table with one element { "🤖:" }
-
-				-- chat_assistant_prefix = { "🤖:", "[{{agent}}]" },
-
-				-- local shortcuts bound to the chat buffer
-				-- (be careful to choose something which will work across specified modes)
-				chat_shortcut_respond = { modes = { "n", "v", "x" }, shortcut = "<leader>cbr" },
-				chat_shortcut_delete = { modes = { "n", "v", "x" }, shortcut = "<leader>cbd" },
-				chat_shortcut_stop = { modes = { "n", "v", "x" }, shortcut = "<leader>cbs" },
-				chat_shortcut_new = { modes = { "n", "v", "x" }, shortcut = "<leader>cbn" },
-
-				-- how to display GpChatToggle or GpContext: popup / split / vsplit / tabnew
-				toggle_target = "vsplit",
-			}
-			require("gp").setup(conf)
-
-			-- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
-			local function keymapOptions(desc)
-				return {
-					noremap = true,
-					silent = true,
-					nowait = true,
-					desc = "GPT prompt " .. desc,
-				}
-			end
-
-			-- chat commands
-			vim.keymap.set("n", "<leader>aiv", "<cmd>GpChatToggle vsplit<cr>", { desc = "GP: Toggle chat in vsplit" })
-			vim.keymap.set("n", "<leader>aip", "<cmd>GpChatToggle popup<cr>", { desc = "GP: Toggle chat in popup" })
-			vim.keymap.set("n", "<leader>ait", "<cmd>GpChatToggle tabnew<cr>", { desc = "GP: Toggle chat in new tab" })
-			vim.keymap.set("v", "<leader>aiw", ":<C-u>'<,'>GpChatPaste<cr>", { desc = "GP: Paste selection into chat" })
-			vim.keymap.set(
-				"v",
-				"<leader>aiv",
-				":<C-u>'<,'>GpChatToggle vsplit<cr>",
-				{ desc = "GP: Toggle chat with selection in vsplit" }
-			)
-			vim.keymap.set(
-				"v",
-				"<leader>aip",
-				":<C-u>'<,'>GpChatToggle popup<cr>",
-				{ desc = "GP: Toggle chat with selection in popup" }
-			)
-			vim.keymap.set(
-				"v",
-				"<leader>ait",
-				":<C-u>'<,'>GpChatToggle tabnew<cr>",
-				{ desc = "GP: Toggle chat with selection in new tab" }
-			)
-			vim.keymap.set("n", "<C-g>j", "<cmd>GpContext<cr>", { desc = "GP: Toggle context" })
-			vim.keymap.set("v", "<C-g>j", ":<C-u>'<,'>GpContext<cr>", { desc = "GP: Toggle context for selection" })
-		end,
-	},
 	{
 		-- neorg/ norg
 		-- note-taking plugin with markdown-like syntax
@@ -726,33 +541,6 @@ return {
 
 			vim.wo.foldlevel = 99
 			vim.wo.conceallevel = 2
-		end,
-	},
-	-- Vim Table Mode
-	-- make simple tables in nvim
-	{
-		"dhruvasagar/vim-table-mode",
-		config = function()
-			-- disable all native bindings, then set your own
-			vim.g.table_mode_disable_mappings = 1
-			vim.g.table_mode_disable_tableize_mappings = 1
-
-			-- Explicitly unmap <leader>tt to avoid conflicts with Trouble
-			-- vim.keymap.del("n", "<leader>tt")
-			-- vim.keymap.del("n", "<leader>T")
-
-			vim.keymap.set(
-				"n",
-				"<Leader>tmt",
-				":TableModeToggle<CR>",
-				{ noremap = true, silent = true, desc = "Table-Mode: Toggle table mode" }
-			)
-			vim.keymap.set(
-				"n",
-				"<Leader>tmc",
-				":Tableize<CR>",
-				{ noremap = true, silent = true, desc = "Table-Mode: Convert to table" }
-			)
 		end,
 	},
 
@@ -808,13 +596,11 @@ return {
 	-- snacks
 	{
 		"folke/snacks.nvim",
-		priority = 1000,
-		lazy = false,
+		event = "VeryLazy",
 		opts = {
-			-- Position the image near the cursor
 			styles = {
 				snacks_image = {
-					relative = "cursor", -- Position relative to cursor
+					relative = "cursor",
 					border = "rounded",
 					focusable = false,
 					backdrop = false,
@@ -822,7 +608,7 @@ return {
 					col = 1,
 				},
 			},
-			-- Only enable the image plugin
+
 			image = {
 				enabled = true,
 				formats = {
@@ -848,20 +634,15 @@ return {
 				},
 				doc = {
 					enabled = true,
-					inline = false, -- Disable inline mode (don't show all images in buffer)
-					float = true, -- Enable floating window display
+					inline = false,
+					float = true,
 					max_width = 60,
 					max_height = 30,
 				},
 				img_dirs = { vim.fn.expand("~/image_notes") },
-				debug = {
-					request = false,
-					convert = false,
-					placement = false,
-				},
 			},
 
-			-- Disable all other snacks plugins
+			-- explicitly disable everything else
 			animate = { enabled = false },
 			bigfile = { enabled = false },
 			bufdelete = { enabled = false },
@@ -893,6 +674,7 @@ return {
 			zen = { enabled = false },
 		},
 	},
+
 	-- Image paste functionality with img-clip.nvim
 	{
 		"HakonHarnes/img-clip.nvim",
