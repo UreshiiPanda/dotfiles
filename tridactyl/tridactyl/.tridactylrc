@@ -17,7 +17,6 @@ set searchurls.google https://www.google.com/search?q=
 set searchurls.googlelucky https://www.google.com/search?btnI=I'm+Feeling+Lucky&q=
 set searchurls.scholar https://scholar.google.com/scholar?q=
 set searchurls.googleuk https://www.google.co.uk/search?q=
-set searchurls.bing https://www.bing.com/search?q=
 set searchurls.duckduckgo https://duckduckgo.com/?q=
 set searchurls.yahoo https://search.yahoo.com/search?p=
 set searchurls.twitter https://twitter.com/search?q=
@@ -33,7 +32,7 @@ set searchurls.osm https://www.openstreetmap.org/search?query=
 set searchurls.mdn https://developer.mozilla.org/en-US/search?q=
 set searchurls.gentoo_wiki https://wiki.gentoo.org/index.php?title=Special%3ASearch&profile=default&fulltext=Search&search=
 set searchurls.qwant https://www.qwant.com/?q=
-set searchurls.lh http://localhost:8000/
+set searchurls.lh localhost:8080
 set searchurls.re https://www.reddit.com/search/?q=
 set searchurls.ba https://client.schwab.com/Areas/Access/Login
 set searchurls.am https://www.amazon.com/s?k=
@@ -68,6 +67,7 @@ set searchurls.pl https://planner.cloud.microsoft/webui/mytasks/assignedtome/vie
 set searchurls.ap https://portal.azure.com/#home
 set searchurls.do https://dev.azure.com/moregroup-inc/moregroup/_boards/board/t/moregroup%20Team/Features
 set searchurls.esp https://www.google.com/search?client=firefox-b-1-d&q=spanish+to+english
+set searchurls.vh https://30395-1.portal.athenahealth.com/?deeplink=section%3Dmessages%26athenareferrer%3DWEBPORTAL%5FGENERALMESSAGE%5FCTA%26utm%255Fcampaign%3Dcommunicator%26utm%255Fmedium%3Demail%26utm%255Fsource%3DMessage%255FNotification
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
