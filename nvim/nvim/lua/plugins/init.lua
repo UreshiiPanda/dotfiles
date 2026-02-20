@@ -531,7 +531,10 @@ return {
 					},
 					["core.esupports.indent"] = {
 						config = {
-							dedent_excess = false,
+							dedent_excess = true,
+							format_on_enter = true,
+							format_on_escape = true,
+							indent_width = 4, -- Add this
 						},
 					},
 				},
