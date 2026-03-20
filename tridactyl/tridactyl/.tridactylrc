@@ -68,6 +68,7 @@ set searchurls.ap https://portal.azure.com/#home
 set searchurls.do https://dev.azure.com/moregroup-inc/moregroup/_boards/board/t/moregroup%20Team/Features
 set searchurls.esp https://www.google.com/search?client=firefox-b-1-d&q=spanish+to+english
 set searchurls.vh https://30395-1.portal.athenahealth.com/?deeplink=section%3Dmessages%26athenareferrer%3DWEBPORTAL%5FGENERALMESSAGE%5FCTA%26utm%255Fcampaign%3Dcommunicator%26utm%255Fmedium%3Demail%26utm%255Fsource%3DMessage%255FNotification
+set searchurls.vp https://vantagepoint.moregroup-inc.com/Vantagepoint/app
 set hintfiltermode simple
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintdelay 300
